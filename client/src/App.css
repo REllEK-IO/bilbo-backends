@@ -1,0 +1,28 @@
+body{
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+h1,h2,h3,h4{
+	font-family: 'Playfair Display', serif;
+}
+
+.navbar-logo {
+	width: 400px;
+}
+
+.center-block {
+	margin: 0 auto;
+	display: block;
+}
+
+.jumbotron{
+	padding: 2rem;
+}
+
+#search-header{
+	margin-bottom: 2rem;
+}
+
+.fancy {
+  box-shadow: inset -5px -5px 8px palegreen;
+}
