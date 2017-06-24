@@ -13,6 +13,7 @@
     "concurrently": "^3.4.0",
     "google-map-react": "^0.24.0",
     "react-codemirror": "^1.0.0",
+    "react-tagcloud": "^1.2.0",
     "react-youtube": "^7.4.0",
     "rimraf": "^2.5.4"
   },

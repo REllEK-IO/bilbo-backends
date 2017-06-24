@@ -10,6 +10,7 @@ import Navbar from "./components/children/Navbar";
 import Demo from './components/Demo';
 // import Mapper from './components/Map';
 import GoogleMaps from './components/GoogleMaps'
+import WordCloud from './components/WordCloud'
 
 const App = () => (
   <Router>
@@ -24,9 +25,10 @@ const App = () => (
                                         title : "Github",
                                         link : "https://github.com/mtkeller/"
                                       }]}/>
-
+          <br />
+          <GoogleMaps />
           <div className="offset-1 col-lg-10">
-            <GoogleMaps />
+            <WordCloud className="text-center" />
           </div>
         </div>
       }/>
