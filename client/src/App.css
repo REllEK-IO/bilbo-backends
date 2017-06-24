@@ -26,3 +26,9 @@ h1,h2,h3,h4{
 .fancy {
   box-shadow: inset -5px -5px 8px palegreen;
 }
+
+.map-box{
+	height: 500px;
+	width: 500px;
+	background-color: black;
+}

@@ -8,14 +8,15 @@ import './App.css';
 import Navbar from "./components/children/Navbar";
 // import YoutubeBlock from './components/children/YoutubeBlock'
 import Demo from './components/Demo';
-import Mapper from './components/Map';
+// import Mapper from './components/Map';
+import GoogleMaps from './components/GoogleMaps'
 
 const App = () => (
   <Router>
   <Switch>
       <Route exact path="/" children={() => 
         <div>
-          <Navbar pageTitle={"Zen"} navItems={[{
+          <Navbar pageTitle={"Food Maps"} navItems={[{
                                         title : "test",
                                         link : "/test"
                                       },
@@ -25,10 +26,7 @@ const App = () => (
                                       }]}/>
 
           <div className="offset-1 col-lg-10">
-            <Mapper
-              containerElement={<div style={{height:100 + '%', width: 100 + '%'}} />}
-              mapElement={<div style={{height:100 + '%', width: 100 + '%'}} />}
-            />
+            <GoogleMaps />
           </div>
         </div>
       }/>
