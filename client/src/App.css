@@ -1,7 +1,6 @@
 body{
 	font-family: 'Roboto Condensed', sans-serif;
-	/*background-color: black;*/
-	/*background-image: linear-gradient( 135deg, #5EFCE8 0%, #736EFE 100%);*/
+	background-color: white;
 }
 
 h1,h2,h3,h4{
@@ -42,12 +41,12 @@ background-image: linear-gradient( 135deg, #92FFC0 0%, #002661 100%);
 	height: 400px;
 	background-color: black;
 	padding: 0px;
-	box-shadow: 0 0 2px grey;
 }
 
 .word-box{
-	height: 300px;
-	margin-bottom: 40px;
+	height: 350px;
+	margin-bottom: 20px;
+	border: solid 1px #bbb;
 }
 
 .myTagCloud span {
@@ -68,6 +67,38 @@ background-image: linear-gradient( 135deg, #92FFC0 0%, #002661 100%);
 
 .btn-primary {
 	margin-bottom: 10px;
+}
+
+.input-hidden {
+  position: absolute;
+  left: -9999px;
+}
+
+input[type=radio]:checked + label>img {
+  border: 1px solid #fff;
+  box-shadow: 0 0 3px 3px #090;
+}
+
+
+/* Stuff after this is only to make things more pretty */
+input[type=radio] + label>img {
+  width: 60px;
+  height: 30px;
+  transition: 500ms all;
+  margin-right: 5px;
+}
+
+input[type=radio1] + label>img {
+  width: 30px;
+  height: 30px;
+  transition: 500ms all;
+  margin-right: 5px;
+}
+
+input[type=radio2] + label>img {
+  width: 50px;
+  height: 30px;
+  transition: 500ms all;
 }
 
 .footer {
