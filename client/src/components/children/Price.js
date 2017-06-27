@@ -5,7 +5,6 @@ class Price extends React.Component {
         return (
             <div id="price">
                 What's your price range?
-                    <input type="number"/>
             </div>
         );
     }

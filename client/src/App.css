@@ -1,5 +1,6 @@
 body{
 	font-family: 'Roboto Condensed', sans-serif;
+	/*background-color: black;*/
 	/*background-image: linear-gradient( 135deg, #5EFCE8 0%, #736EFE 100%);*/
 }
 
@@ -8,7 +9,7 @@ h1,h2,h3,h4{
 }
 
 .navbar{
-	background-image: linear-gradient( 235deg, #FAD7A1 0%, #E96D71 100%);
+	background-image: linear-gradient( 235deg, #90F7EC 0%, #32CCBC 100%);
 	box-shadow: 0 0 2px grey;
 }
 
@@ -41,6 +42,12 @@ h1,h2,h3,h4{
 	height: 400px;
 	background-color: black;
 	padding: 0px;
+	box-shadow: 0 0 2px grey;
+}
+
+.word-box{
+	height: 300px;
+	background-image: linear-gradient( 35deg, #ABDCFF 0%, #0396FF 100%);
 }
 
 .myTagCloud span {
@@ -60,6 +67,5 @@ h1,h2,h3,h4{
 }
 
 .btn-primary {
-	text-align: center;
 	margin-bottom: 10px;
 }
