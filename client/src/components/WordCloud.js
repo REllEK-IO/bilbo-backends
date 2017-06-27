@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { TagCloud } from "react-tagcloud";
- 
+
+const options = {
+  luminosity: 'light',
+  hue: 'blue'
+};
+
 const data = [
   { value: "title", count: 25 }, { value: "What can you go for?", count: 35 },
   { value: "JavaScript", count: 38 }, { value: "React", count: 30 },
@@ -17,6 +22,7 @@ const WordCloud = () => (
   <div className={"col-lg-12 word-box"}>
   <TagCloud minSize={12}
             maxSize={35}
+            colorOptions={options}
             tags={data}
             style={{width: 300, textAlign: 'left'}}
             className="myTagCloud center-block text-center" />
