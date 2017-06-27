@@ -5,7 +5,7 @@ class Area extends React.Component {
         return (
           <div id="area">
             Where do you want to eat?
-            <input type="text" placeholder="Neighborhood, ZIP, Address" />
+            <input type="text" placeholder="Area Name, Address or ZIP" />
           </div>
         );
     }
