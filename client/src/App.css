@@ -40,8 +40,21 @@ h1,h2,h3,h4{
 .map-box{
 	height: 400px;
 	background-color: black;
+	padding: 0px;
 }
 
 .myTagCloud span {
   text-decoration: underline;
+}
+
+#area {
+}
+
+#price {
+}
+
+#area-price {
+	font-size: 24px;
+	margin-bottom: 30px;
+	margin-top: 10px;
 }
