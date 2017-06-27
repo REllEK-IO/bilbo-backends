@@ -44,6 +44,8 @@ const App = () => (
              </div>
           </div>
 
+          <button type="button" className="btn btn-primary">Submit</button>
+
           <GoogleMaps />
         
           <Footer />
