@@ -11,6 +11,9 @@ import Demo from './components/Demo';
 // import Mapper from './components/Map';
 import GoogleMaps from './components/GoogleMaps'
 import WordCloud from './components/WordCloud'
+import Area from './components/children/Area'
+import Price from './components/children/Price'
+import Footer from './components/children/Footer'
 
 const App = () => (
   <Router>
@@ -26,11 +29,29 @@ const App = () => (
                                         link : "https://github.com/mtkeller/"
                                       }]}/>
           <br />
-          <GoogleMaps />
 
-          <br />
-          <WordCloud className="text-center" />
+          <div className="offset-1 col-lg-10">
+            <WordCloud className="text-center" />
+          </div>
+
+          <div className={"row text-center"} id="area-price">
+             <div className={"offset-lg-2 col-lg-4"} id="area">          
+               <Area />
+             </div>
+
+             <div className={"col-lg-4"} id="price">          
+               <Price />
+             </div>
+          </div>
+
+          <button type="button" className={"btn btn-primary center-block"}>Find Restaurants</button>
+
+          <GoogleMaps />
+        
+          <Footer />
+
         </div>
+
       }/>
     </Switch>
   </Router>
