@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { TagCloud } from "react-tagcloud";
  
 const data = [
-  { value: "title", count: 25 }, { value: "What can you go for?", count: 40 },
+  { value: "title", count: 25 }, { value: "What can you go for?", count: 35 },
   { value: "JavaScript", count: 38 }, { value: "React", count: 30 },
   { value: "Nodejs", count: 28 }, { value: "Express.js", count: 25 },
   { value: "HTML5", count: 33 }, { value: "CSS3", count: 20 },
@@ -19,7 +19,7 @@ const WordCloud = () => (
             maxSize={35}
             tags={data}
             style={{width: 300, textAlign: 'left'}}
-            className="myTagCloud" />
+            className="myTagCloud center-block text-center" />
   </div>
 );
 

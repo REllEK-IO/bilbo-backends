@@ -9,7 +9,7 @@ h1,h2,h3,h4{
 }
 
 .navbar{
-	background-image: linear-gradient( 235deg, #90F7EC 0%, #32CCBC 100%);
+background-image: linear-gradient( 135deg, #92FFC0 0%, #002661 100%);
 	box-shadow: 0 0 2px grey;
 }
 
@@ -47,7 +47,7 @@ h1,h2,h3,h4{
 
 .word-box{
 	height: 300px;
-	background-image: linear-gradient( 35deg, #ABDCFF 0%, #0396FF 100%);
+	margin-bottom: 40px;
 }
 
 .myTagCloud span {
@@ -68,4 +68,8 @@ h1,h2,h3,h4{
 
 .btn-primary {
 	margin-bottom: 10px;
+}
+
+.footer {
+background-image: linear-gradient( 135deg, #92FFC0 0%, #002661 100%);
 }
