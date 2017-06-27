@@ -50,12 +50,18 @@ var styled = [
     }
 ]
 
+const mapOptions = {
+	styles: styled // straight out of something like snazzymaps
+};
+
 export default class GoogleMap extends Component {
   static defaultProps = {
-    center: {lat: 59.95, lng: 30.33},
-    zoom: 11
+    center: {lat: 32.792095, lng: -117.232337},
+    zoom: 15
 		// defaultOptions:{{ styles: styled }}
   };
+
+	
  
   render() {
     return (
@@ -63,7 +69,7 @@ export default class GoogleMap extends Component {
       <GoogleMapReact
         defaultCenter={this.props.center}
         defaultZoom={this.props.zoom}
-				styles={this.props.mapStyles}
+				options={mapOptions}
       />
 			</div>
     );

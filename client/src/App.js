@@ -27,9 +27,9 @@ const App = () => (
                                       }]}/>
           <br />
           <GoogleMaps />
-          <div className="offset-1 col-lg-10">
-            <WordCloud className="text-center" />
-          </div>
+
+          <br />
+          <WordCloud className="text-center" />
         </div>
       }/>
     </Switch>
