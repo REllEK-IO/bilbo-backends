@@ -13,7 +13,7 @@ var url = "http://api.yummly.com/v1/api/recipes?" + app_id + app_key + "&q=" + c
 var randomArray = [];
 var randomWords = {
 
-		finalArray:[];
+		finalArray:[],
 		//***** Varriable below is for testing purposes*****
 		foodType: ["punjabi", "italian", "mexican","chinese","russian","indian", "indian", "indian",
 		 "spanish","mediterranean","ethiopian","moroccan", "greek","american","japanese","korean",
@@ -69,20 +69,18 @@ function clearWords () {
 	var clear = randomWords.clearRandomArray();
 }
 
+// ****** Checks to make sure randomArray clear is working *****
+// function checkClear () {
+// 	for(i =0; i < randomArray.length; i++) {
+// 		if (randomArray[i] === "thai" || randomArray[i] === "indian" || randomArray[i] === "mexican"){
+// 			clearWords();
+// 			console.log(randomArray);
+// 		}
+// 	}
+// }
+
+
 generateWords();
-
-// Checks to make sure randomArray clear is working
-function checkClear () {
-	for(i =0; i < randomArray.length; i++) {
-		if (randomArray[i] === "thai" || randomArray[i] === "indian" || randomArray[i] === "mexican"){
-			clearWords();
-			console.log(randomArray);
-		}
-	}
-}
-
-
-
 
 module.exports
 

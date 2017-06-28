@@ -1,7 +1,7 @@
 // ============ URL ================
 var app_id= "_app_id=966158dd";
 var app_key = "&_app_key=1a26a81b5d589e14c6857ca6160e5df4";
-var cuisine = "chinese";
+var cuisine = ["chinese", ;
 var url = "http://api.yummly.com/v1/api/recipes?" + app_id + app_key + "&q=" + cuisine;
 
  queryYummly: function (){
