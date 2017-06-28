@@ -55,6 +55,15 @@ const mapOptions = {
 };
 
 export default class GoogleMap extends Component {
+  constructor(props){
+      super(props);
+
+      this.state = {
+          lat : this.props.lat,
+          lng : this.props.lng,
+          center : {lat: this.props.lat, lng: this.props.lng}
+      }
+  }
   static defaultProps = {
     center: {lat: 32.792095, lng: -117.232337},
     zoom: 15
@@ -67,7 +76,7 @@ export default class GoogleMap extends Component {
     return (
 			<div className={"col-lg-12 map-box"}>
       <GoogleMapReact
-        defaultCenter={this.props.center}
+        defaultCenter={this.state.center}
         defaultZoom={this.props.zoom}
 				options={mapOptions}
       />
