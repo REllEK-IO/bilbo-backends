@@ -9,10 +9,11 @@ var cuisine = "";
 var url = "http://api.yummly.com/v1/api/recipes?" + app_id + app_key + "&q=" + cuisine;
 
 //======== Array Variables ==============
-
+//var foodType=[];  // Pass in database query here
+var randomArray = [];
 var randomWords = {
 
-		randomArray: [];
+		
 		finalArray:[];
 		foodType: ["punjabi", "italian", "mexican","chinese","russian","indian", "indian", "indian",
 		 "spanish","mediterranean","ethiopian","moroccan", "greek","american","japanese","korean",
