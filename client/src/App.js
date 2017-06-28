@@ -20,13 +20,13 @@ const App = () => (
   <Switch>
       <Route exact path="/" children={() => 
         <div>
-          <Navbar pageTitle={"Food Maps"} navItems={[{
+          <Navbar pageTitle={"Gopher That"} navItems={[{
                                         title : "test",
                                         link : "/test"
                                       },
                                       {
                                         title : "Github",
-                                        link : "https://github.com/mtkeller/"
+                                        link : "https://github.com/mtKeller/bilbo-backends"
                                       }]}/>
           <br />
 
@@ -45,9 +45,16 @@ const App = () => (
           </div>
 
           <button type="button" className={"btn btn-primary center-block"}>Find Restaurants</button>
-
-          <GoogleMaps />
-        
+          <div className={"row"}>
+            <div className={"col-lg-1 kill-padding"}>
+              <button className="btn btn-outline-primary btn-sm float-lg-right square">
+                <i className={"fa fa-bars"} aria-hidden={"true"}/>
+              </button>
+            </div>
+            <div className={"col-lg-11 kill-padding"}>
+              <GoogleMaps />
+            </div>
+          </div>
           <Footer />
 
         </div>
