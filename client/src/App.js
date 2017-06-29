@@ -25,16 +25,34 @@ class App extends Component{
     
     window.setInterval(function () {
       this.setTime();
-    }.bind(this), 1000);
+    }.bind(this), 10000);
 
     ////priceLevel
     //1 - 4 sets current return to this exact range
     //0 sets to all
+    var randomSizeList = function(){
+      var foodList = ["tacos","thai","seafood","gastro pub","california roll","mexican","cheese steak","eggs benedict","bakery","martini","pho","bbq chicken pizza","sushirrito","dim sum","fruit salad","vegan sandwich","hot wings","waffles","green smoothie","gelato"];
+      var objFoodList = [];
+      var max = 35;
+      var min = 12;
+
+      for(var i = 0; i < foodList.length; i++){
+        objFoodList.push({
+          value : foodList[i],
+          count : Math.floor(Math.random() * (max - min)) + min 
+        })
+      }
+
+      return objFoodList;
+    }
+    var food = randomSizeList();
+    console.log(food);
 
     this.state = {
       priceLevel : 0,
       lat : 32.792095,
-      lng : -117.232337
+      lng : -117.232337,
+      initWordCloud: food
     }
   }
   //Sets current time
@@ -115,7 +133,7 @@ class App extends Component{
             <br />
 
             <div className="offset-1 col-lg-10">
-              <WordCloud className="text-center" />
+              <WordCloud className="text-center" init={this.state.initWordCloud}/>
             </div>
 
             <div className={"row text-center"} id="area-price">

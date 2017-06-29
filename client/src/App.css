@@ -54,7 +54,7 @@ background-image: linear-gradient( 135deg, #92FFC0 0%, #002661 100%);
 }
 
 .myTagCloud span {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .kill-padding {
