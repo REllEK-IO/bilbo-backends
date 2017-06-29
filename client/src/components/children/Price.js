@@ -1,10 +1,15 @@
 import React from "react";
 
 class Price extends React.Component {
+    constructor(props) {
+    // This super(props) line lets us access our parents properties as props.
+    super(props);
+    this.state = {
+      range: []
+    }
+  }
     render() {
         return (
-            <div id="price">
-                How much do you want to spend?
                   <div id="dollar-signs">
                     <input type="checkbox" name="cheap" id="single" className="input-hidden" />
                     <label htmlFor="single">
@@ -21,7 +26,6 @@ class Price extends React.Component {
                       <img id = "tripleimg" src="http://i.imgur.com/MoWpFGw.png"/>
                     </label>
                   </div>
-            </div>
         );
     }
 };
