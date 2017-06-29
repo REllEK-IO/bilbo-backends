@@ -119,9 +119,8 @@ class App extends Component{
             </div>
 
             <div className={"row text-center"} id="area-price">
-              <div className={"offset-lg-2 col-lg-4"} id="area">          
+            
                 <Area />
-              </div>
 
               <div className={"col-lg-4"} id="price">          
                 <Price />
