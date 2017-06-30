@@ -15,6 +15,9 @@ import Area from './components/children/Area'
 import Price from './components/children/Price'
 import Footer from './components/children/Footer'
 
+//helpers
+import places from "./helpers/googlePlaces";
+
 class App extends Component{
   constructor(props) {
     super(props);
@@ -22,7 +25,10 @@ class App extends Component{
     
     //Gets current time and continuously updates
     this.setTime();
-    
+    places.getPlaces().then((response)=> {
+      this.setMarkers(response.data.results);
+    });
+
     window.setInterval(function () {
       this.setTime();
     }.bind(this), 10000);
@@ -53,9 +59,18 @@ class App extends Component{
       range : 0,
       lat : 32.792095,
       lng : -117.232337,
-      initWordCloud: food
+      initWordCloud: food,
+      markers: null
     }
   }
+  //Set current map markers
+  setMarkers(data){
+    this.setState({
+      markers : data
+    })
+    console.log(this.state.markers, "fucker");
+  }
+
   //Sets current time
   setTime(){
   
