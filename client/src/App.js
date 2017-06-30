@@ -15,6 +15,9 @@ import Area from './components/children/Area'
 import Price from './components/children/Price'
 import Footer from './components/children/Footer'
 
+//helpers
+import places from "./helpers/googlePlaces";
+
 class App extends Component{
   constructor(props) {
     super(props);
@@ -22,7 +25,8 @@ class App extends Component{
     
     //Gets current time and continuously updates
     this.setTime();
-    
+    places.getPlaces();
+
     window.setInterval(function () {
       this.setTime();
     }.bind(this), 10000);
