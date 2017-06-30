@@ -12,11 +12,9 @@ var places = (function () {
 		var searchMinPrice = minPrice || 0;
 		var searchMaxPrice = maxPrice || 4;
 
-		const STRUCTURED_QUERY = QUERYURL + "&location=" + latitude + "," + longitude + "&query=" + encodeURI(searchQuery) + "&radius=" + searchRadius +
+		const STRUCTURED_QUERY = QUERYURL + "&location=" + latitude + "," + longitude + "&keyword=" + encodeURI(searchQuery) + "&" + "&radius=" + searchRadius +
 			"&opennow=true" + "&minprice=" + searchMinPrice + "&maxprice=" + searchMaxPrice + APIKEY;
-		axios.get(STRUCTURED_QUERY, {headers: {
-	  'Access-Control-Allow-Origin': '*',
-	}})
+		var getCall = axios.get(STRUCTURED_QUERY)
 			.then(function (response) {
 				console.log(STRUCTURED_QUERY)
 				return response;
@@ -24,6 +22,8 @@ var places = (function () {
 			.catch(function (error) {
 				return error;
 			});
+		
+		return getCall;
 	}
 	return ({
 		getPlaces: getPlaces

@@ -25,7 +25,9 @@ class App extends Component{
     
     //Gets current time and continuously updates
     this.setTime();
-    places.getPlaces();
+    places.getPlaces().then((response)=> {
+      this.setMarkers(response.data.results);
+    });
 
     window.setInterval(function () {
       this.setTime();
@@ -57,9 +59,18 @@ class App extends Component{
       range : 0,
       lat : 32.792095,
       lng : -117.232337,
-      initWordCloud: food
+      initWordCloud: food,
+      markers: null
     }
   }
+  //Set current map markers
+  setMarkers(data){
+    this.setState({
+      markers : data
+    })
+    console.log(this.state.markers, "fucker");
+  }
+
   //Sets current time
   setTime(){
   
