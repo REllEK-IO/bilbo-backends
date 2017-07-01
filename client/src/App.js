@@ -6,10 +6,9 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import Navbar from "./components/children/Navbar";
-// import YoutubeBlock from './components/children/YoutubeBlock'
-import Demo from './components/Demo';
-// import Mapper from './components/Map';
-import GoogleMaps from './components/GoogleMaps'
+
+import WrappedContainer from './components/Container';
+
 import WordCloud from './components/WordCloud'
 import Area from './components/children/Area'
 import Price from './components/children/Price'
@@ -18,10 +17,10 @@ import Footer from './components/children/Footer'
 //helpers
 import places from "./helpers/googlePlaces";
 
-const AnyReactComponent = ({ text }) => <div style={{
+const AnyReactComponent = ( text ) => (<div style={{
     position: 'absolute', color: 'white', background: 'red',
     height: 40, width: 60    
-  }}>{text}</div>;
+  }}>{text}</div>);
 
 class App extends Component{
   constructor(props) {
@@ -216,19 +215,8 @@ class App extends Component{
             </div>
 
             <div className={"row"}>
-              <div className={"col-lg-1 kill-padding"}>
-                <button className="btn btn-outline-primary btn-sm float-lg-right square">
-                  <i className={"fa fa-bars"} aria-hidden={"true"}/>
-                </button>
-              </div>
-              <div className={"col-lg-11 kill-padding"}>
-                <GoogleMaps lat={this.state.lat} lng={this.state.lng}>
-                      <AnyReactComponent
-                        lat={this.state.lat}
-                        lng={this.state.lng}
-                        text={"TEST"}
-                      />
-                </GoogleMaps>
+              <div className={"col-lg-11"}>
+                <WrappedContainer />
               </div>
             </div>
             <Footer />
