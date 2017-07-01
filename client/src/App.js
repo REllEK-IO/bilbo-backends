@@ -18,6 +18,11 @@ import Footer from './components/children/Footer'
 //helpers
 import places from "./helpers/googlePlaces";
 
+const AnyReactComponent = ({ text }) => <div style={{
+    position: 'absolute', color: 'white', background: 'red',
+    height: 40, width: 60    
+  }}>{text}</div>;
+
 class App extends Component{
   constructor(props) {
     super(props);
@@ -26,7 +31,7 @@ class App extends Component{
     //Gets current time and continuously updates
     this.setTime();
     places.getPlaces().then((response)=> {
-      this.setMarkers(response.data.results);
+      this.setMarkers(response);
     });
 
     window.setInterval(function () {
@@ -53,6 +58,54 @@ class App extends Component{
     }
     var food = randomSizeList();
     console.log(food);
+    var initialMarkerObj = {
+      "geometry": {
+        "location": {
+          "lat": 32.74752299999999,
+          "lng": -117.1601377
+        },
+        "viewport": {
+          "northeast": {
+            "lat": 32.74886858029149,
+            "lng": -117.1589314197085
+          },
+            "southwest": {
+            "lat": 32.7461706197085,
+            "lng": -117.1616293802915
+          }
+        }
+      },
+
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
+      "id": "33b3327d5ecab8d58f49ca9f38270b8430c98b48",
+      "name": "La Vecindad Neighborhood TACOS",
+      "opening_hours": {
+      "open_now": true,
+      "weekday_text": []
+      },
+      "photos": [
+      {
+      "height": 5312,
+      "html_attributions": [
+      "<a href=\"https://maps.google.com/maps/contrib/104464396591733731003/photos\">Cooper Nelson</a>"
+      ],
+      "photo_reference": "CmRaAAAAXMh88X9p1MAzSTkMzRbclKPV7mp00hj7W2fa8xmdgavXcSPORrx8kh6Js5GzQuGTxOBqLaTz9zyKAiPIsvqB5xnoHkW525Kkqmid_Z46LeW6MxKyj8NIH2qlMLMcs-t5EhCg7vEVZOiRIhzAnT8Ek2vmGhRi7k-b-PZAIgCTQtekxSGfFwwg3Q",
+      "width": 2988
+      }
+      ],
+      "place_id": "ChIJ23wLwNpU2YAR59BKIvCfXLk",
+      "price_level": 1,
+      "rating": 4.7,
+      "reference": "CmRSAAAA-Jl8Jfxea5-RqxwJXztuBTXpXGV3hy3_PUa2Bfm5unxwwWEwHwZrT9rIHNZLA0keBL-TX9sl76KmclNP4ZaOCTtmjlDAE9tkpj5SaGVwurzp-hOnXPeviq-hqDXzIQHVEhARiwXVtS9Q-RSX-gyFbBOEGhRMy2ZKVP4MwhP9Ex8q5IWLi89edQ",
+      "scope": "GOOGLE",
+      "types": [
+      "restaurant",
+      "food",
+      "point_of_interest",
+      "establishment"
+      ],
+      "vicinity": "3827 Fifth Avenue, San Diego"
+      };
 
     this.state = {
       priceLevel : 0,
@@ -60,14 +113,14 @@ class App extends Component{
       lat : 32.792095,
       lng : -117.232337,
       initWordCloud: food,
-      markers: null
+      markers: [initialMarkerObj]
     }
   }
   //Set current map markers
   setMarkers(data){
-    this.setState({
-      markers : data
-    })
+    // this.setState({
+    //   markers : data.results
+    // })
     console.log(this.state.markers, "fucker");
   }
 
@@ -169,7 +222,13 @@ class App extends Component{
                 </button>
               </div>
               <div className={"col-lg-11 kill-padding"}>
-                <GoogleMaps lat={this.state.lat} lng={this.state.lng} />
+                <GoogleMaps lat={this.state.lat} lng={this.state.lng}>
+                      <AnyReactComponent
+                        lat={this.state.lat}
+                        lng={this.state.lng}
+                        text={"TEST"}
+                      />
+                </GoogleMaps>
               </div>
             </div>
             <Footer />
