@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import Navbar from "./components/children/Navbar";
 
-import WrappedContainer from './components/Container';
+import Container from './components/Container';
 
 import WordCloud from './components/WordCloud'
 import Area from './components/children/Area'
@@ -16,11 +16,6 @@ import Footer from './components/children/Footer'
 
 //helpers
 import places from "./helpers/googlePlaces";
-
-const AnyReactComponent = ( text ) => (<div style={{
-    position: 'absolute', color: 'white', background: 'red',
-    height: 40, width: 60    
-  }}>{text}</div>);
 
 class App extends Component{
   constructor(props) {
@@ -112,8 +107,11 @@ class App extends Component{
       lat : 32.792095,
       lng : -117.232337,
       initWordCloud: food,
-      markers: [initialMarkerObj]
+      markers: [initialMarkerObj],
+      currentLocation: {lat: 32.792095, lng: -117.232337}
     }
+    console.log("Old state: ", this.state.currentLocation);
+    this.setLocation();
   }
   //Set current map markers
   setMarkers(data){
@@ -149,6 +147,21 @@ class App extends Component{
       hours: hours,
       minutes: minutes,
     });
+  }
+
+  setLocation(){
+    console.log("setting location");
+    if (navigator && navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((pos) => {
+            const coords = pos.coords;
+            this.setState({
+                currentLocation: {
+                    lat: (coords.latitude !== undefined)? coords.latitude : 32.792095,
+                    lng: (coords.longitude !== undefined)? coords.longitude : -117.232337
+                }
+            })
+        })
+    }
   }
 
   getDefaultSearch(){
@@ -215,8 +228,8 @@ class App extends Component{
             </div>
 
             <div className={"row"}>
-              <div className={"col-lg-11"}>
-                <WrappedContainer />
+              <div className={"col-lg-12"}>
+                <Container initialCenter={this.state.currentLocation} />
               </div>
             </div>
             <Footer />

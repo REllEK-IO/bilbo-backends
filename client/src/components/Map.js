@@ -1,43 +1,45 @@
-import React ,{ Component} from 'react';
-import ReactDOM from 'react-dom';
+import Map from 'google-maps-react'
 
-class Map extends React.Component {
-	componentDidMount() {
-    this.loadMap();
-  }
-	
-	componentDidUpdate(prevProps, prevState) {
-    if (prevProps.google !== this.props.google) {
-      this.loadMap();
-    }
-  }
+import MapsSidebar from "./children/MapsSidebar";
 
-	loadMap() {
-    if (this.props && this.props.google) {
-      // google is available
-      const {google} = this.props;
-      const maps = google.maps;
-
-      const mapRef = this.refs.map;
-      const node = ReactDOM.findDOMNode(mapRef);
-
-      let zoom = 14;
-      let lat = 37.774929;
-      let lng = -122.419416;
-      const center = new maps.LatLng(lat, lng);
-      const mapConfig = Object.assign({}, {
-        center: center,
-        zoom: zoom
-      })
-      this.map = new maps.Map(node, mapConfig);
-    }
+class Mapper extends Component{
+	constructor(props){
+		super(props);
+		this.state = {
+			markers : []
+		}
 	}
 
-  render() {
+	render(){
+		return (
+			<div>
+				<GoogleMap
+					defaultZoom={3}
+					defaultCenter={{lat:-25.363882,lng: 131.044922}}>
+					{this.state.markers.map((marker, index) =>(
+						<Marker {...marker} />
+					))}
+					{console.log("testing!!!!!!!!!!!!!!")}
+				</GoogleMap>
+
+			</div>
+		);
+	};
+};React.createClass({
+  fetchPlaces: function(mapProps, map) {
+    const {google} = mapProps;
+    const service = new google.maps.places.PlacesService(map);
+    // ...
+  },
+  render: function() {
     return (
-      <div ref='map'>
-        Test
-      </div>
+      <Map google={this.props.google}
+        onReady={this.fetchPlaces}
+        visible={false}>
+          <Listing places={this.state.places} />
+      </Map>
     )
   }
-}
+});
+
+export default withGoogleMap(Mapper);
