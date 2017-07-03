@@ -161,6 +161,13 @@ input[type=radio]:checked + label>img {
   margin-right: 18px;
 }
 
+#quadimg {
+  width: auto;
+  height: 30px;
+  transition: 500ms all;
+  margin-right: 18px;
+}
+
 #ui-content {
   height: 100px;
 }
