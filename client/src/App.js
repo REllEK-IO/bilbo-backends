@@ -108,7 +108,7 @@ class App extends Component{
       };
 
     this.state = {
-      priceLevel : 0,
+      priceLevel : [1,4],
       range : 0,
       lat : 32.792095,
       lng : -117.232337,
@@ -191,7 +191,7 @@ class App extends Component{
       <Switch>
         <Route exact path="/" children={() => 
           <div>
-            <Navbar pageTitle={"GopherThat"} navItems={[{
+            <Navbar pageTitle={"Gopher That"} navItems={[{
                                           title : "test",
                                           link : "/test"
                                         },
@@ -203,6 +203,10 @@ class App extends Component{
 
             <div className="offset-1 col-lg-10">
               <WordCloud className="text-center" init={this.state.initWordCloud}/>
+            </div>
+
+            <div id="couple">
+              <img id="couple-pic" src="http://i.imgur.com/xO9lzhB.png"></img>
             </div>
 
             <div className={"row text-center"} id="area-price">
