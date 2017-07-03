@@ -103,7 +103,7 @@ class App extends Component{
 
     this.state = {
       priceLevel : [1,4],
-      range : 0,
+      range : 10000,
       lat : 32.792095,
       lng : -117.232337,
       initWordCloud: food,
@@ -221,25 +221,24 @@ class App extends Component{
               <img id="couple-pic" src="http://i.imgur.com/xO9lzhB.png"></img>
             </div>
 
-            <div className={"row text-center"} id="area-price">
-              <div className={"offset-lg-2 col-lg-4"} id="area">     
-                <Area />
-              </div>
+            <div id="map-container">
+              <div className={"row text-center"} id="area-price">
+                <div className={"offset-lg-2 col-lg-4"} id="area">     
+                  <Area />
+                </div>
 
-              <div className={"col-lg-4"} id="price">          
-                <Price />
+                <div className={"col-lg-4"} id="price">          
+                  <Price />
+                </div>
               </div>
-            </div>
-
+    
             <div className={"row"}>
               <div className={"col-lg-12"}>
                 <Container initialCenter={this.state.currentLocation} />
               </div>
+              <Footer />
             </div>
-            <Footer />
-
           </div>
-
         }/>
       </Switch>
     </Router>)
