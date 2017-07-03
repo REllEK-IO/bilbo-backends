@@ -52,54 +52,6 @@ class App extends Component{
     }
     var food = randomSizeList();
     console.log(food);
-    var initialMarkerObj = {
-      "geometry": {
-        "location": {
-          "lat": 32.74752299999999,
-          "lng": -117.1601377
-        },
-        "viewport": {
-          "northeast": {
-            "lat": 32.74886858029149,
-            "lng": -117.1589314197085
-          },
-            "southwest": {
-            "lat": 32.7461706197085,
-            "lng": -117.1616293802915
-          }
-        }
-      },
-
-      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
-      "id": "33b3327d5ecab8d58f49ca9f38270b8430c98b48",
-      "name": "La Vecindad Neighborhood TACOS",
-      "opening_hours": {
-      "open_now": true,
-      "weekday_text": []
-      },
-      "photos": [
-      {
-      "height": 5312,
-      "html_attributions": [
-      "<a href=\"https://maps.google.com/maps/contrib/104464396591733731003/photos\">Cooper Nelson</a>"
-      ],
-      "photo_reference": "CmRaAAAAXMh88X9p1MAzSTkMzRbclKPV7mp00hj7W2fa8xmdgavXcSPORrx8kh6Js5GzQuGTxOBqLaTz9zyKAiPIsvqB5xnoHkW525Kkqmid_Z46LeW6MxKyj8NIH2qlMLMcs-t5EhCg7vEVZOiRIhzAnT8Ek2vmGhRi7k-b-PZAIgCTQtekxSGfFwwg3Q",
-      "width": 2988
-      }
-      ],
-      "place_id": "ChIJ23wLwNpU2YAR59BKIvCfXLk",
-      "price_level": 1,
-      "rating": 4.7,
-      "reference": "CmRSAAAA-Jl8Jfxea5-RqxwJXztuBTXpXGV3hy3_PUa2Bfm5unxwwWEwHwZrT9rIHNZLA0keBL-TX9sl76KmclNP4ZaOCTtmjlDAE9tkpj5SaGVwurzp-hOnXPeviq-hqDXzIQHVEhARiwXVtS9Q-RSX-gyFbBOEGhRMy2ZKVP4MwhP9Ex8q5IWLi89edQ",
-      "scope": "GOOGLE",
-      "types": [
-      "restaurant",
-      "food",
-      "point_of_interest",
-      "establishment"
-      ],
-      "vicinity": "3827 Fifth Avenue, San Diego"
-      };
 
     this.state = {
       priceLevel : 0,
@@ -107,7 +59,7 @@ class App extends Component{
       lat : 32.792095,
       lng : -117.232337,
       initWordCloud: food,
-      markers: [initialMarkerObj],
+      markers: [null],
       currentLocation: {lat: 32.74752299999999, lng: -117.1601377}
     }
     console.log("Old state: ", this.state.currentLocation);
@@ -197,6 +149,13 @@ class App extends Component{
     }
   }
 
+  setPos(newCenter){
+    console.log("New center: " + newCenter);
+    this.setState({
+      currentLocation: newCenter
+    })
+  }
+
   render(){
   return (
     <Router>
@@ -226,10 +185,10 @@ class App extends Component{
                 <Price />
               </div>
             </div>
-
+            <h1 className={"text-center"}>{"lat: " + this.state.currentLocation.lat + " lng: " + this.state.currentLocation.lng}</h1>
             <div className={"row"}>
               <div className={"col-lg-12"}>
-                <Container initialCenter={this.state.currentLocation} />
+                <Container updatePosition={this.setPos.bind(this)} initialCenter={this.state.currentLocation} />
               </div>
             </div>
             <Footer />

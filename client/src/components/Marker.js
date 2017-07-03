@@ -1,28 +1,32 @@
 import React, {	Component } from 'react';
 
 class Marker extends Component {
+	
   componentDidUpdate(prevProps) {
-    // if ((this.props.map !== prevProps.map) ||
-    //   (this.props.position !== prevProps.position)) {
-    //     this.renderMarker();
-    // }
-		this.renderMarker();
+    if ((this.props.map !== prevProps.map) ||
+      (this.props.position !== prevProps.position)) {
+        this.renderMarker();
+    }
   }
 
 	renderMarker() {
-		let {
-			map, position, mapCenter, google
-		} = this.props;
+		if(this.props.google){
+			let {
+				map, position, mapCenter, google
+			} = this.props;
 
-		let pos = position || mapCenter;
-		position = new google.maps.LatLng(pos.lat, pos.lng);
+			let pos = position || mapCenter;
+			console.log("%^%^%   ", pos);
+			position = new google.maps.LatLng(pos.lat, pos.lng);
 
-		const pref = {
-			map: map,
-			position: position
-		};
+			const pref = {
+				setMap: map,
+				position: position
+			};
 
-		this.marker = new google.maps.Marker(pref);
+			this.marker = new google.maps.Marker(pref);
+			console.log(this.marker, "^^^^^^^^^^^^^6");
+		}
 	}
 
 	render() {
