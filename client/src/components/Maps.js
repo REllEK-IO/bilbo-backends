@@ -87,6 +87,7 @@ class Maps extends Component {
       const mapRef = this.refs.map;
       const node = ReactDOM.findDOMNode(mapRef);
 
+      
 
       let zoom = 14;
       let lat = this.state.lat;
@@ -98,10 +99,18 @@ class Maps extends Component {
       const mapConfig = Object.assign({}, {
         center: center,
         zoom: zoom,
-        styles : styled
+        styles: styled
       })
 			
       this.map = new maps.Map(node, mapConfig);
+      // window.google.maps.map = this.map;
+      
+      //events
+      const evtNames = ["dragend"];
+
+      evtNames.forEach(e => {
+        this.map.addListener(e, this.handleEvent(e));
+      });
     }
 	}
 
@@ -119,11 +128,28 @@ class Maps extends Component {
     }
   }
 
+  handleEvent(evtName) {
+    let timeout;
+    const handlerName = evtName;
+    console.log("Setting Event: " + evtName);
+    return (e) => {
+      if (timeout) {
+        clearTimeout(timeout);
+        timeout = null;
+      }
+      timeout = setTimeout(() => {
+        if (this.props[handlerName]) {
+          this.props[handlerName](this.props, this.map, e);
+        }
+      }, 1000);
+    }
+  }
+
   renderChildren() {
     const {children} = this.props;
-
+    
     if (!children) return;
-
+    console.log("$$$ ", children);
     return React.Children.map(children, c => {
       return React.cloneElement(c, {
         map: this.map,

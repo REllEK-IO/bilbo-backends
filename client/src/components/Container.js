@@ -7,11 +7,11 @@ class Container extends React.Component {
   render() {
     const style = {
       width: '100%',
-      height: '200px'
+      height: '250px'
     }
     return (
       <div style={style}>
-        <Maps initialCenter={this.props.initialCenter} google={window.google}>
+        <Maps dragend={function(props,map,evt) {var newCoords = map.getCenter(); props.updatePosition({lat: newCoords.lat(), lng: newCoords.lng()})}} updatePosition={this.props.updatePosition} initialCenter={this.props.initialCenter} google={window.google}>
 					<Marker />
 					<Marker position={this.props.initChildren} />
 				</Maps>
