@@ -7,7 +7,6 @@ class Price extends React.Component {
     this.state = {
       priceLevel: 4
     }
-    console.log("Max Price Level Initially:", this.state.priceLevel)
     this.handlePrice = this.handlePrice.bind(this);
   }
   handlePrice(event) {
