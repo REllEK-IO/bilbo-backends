@@ -159,45 +159,49 @@ class App extends Component{
   render(){
   return (
     <Router>
-      <Route exact path="/" children={() => 
-        <div>
-          <Navbar pageTitle={"Gopher That"} navItems={[{
-                                        title : "test",
-                                        link : "/test"
-                                      },
-                                      {
-                                        title : "Github",
-                                        link : "https://github.com/mtKeller/bilbo-backends"
-                                      }]}/>
-          <br />
+      <Switch>
+        <Route exact path="/" children={() => 
+          <div>
+            <Navbar pageTitle={"Gopher That"} navItems={[{
+                                          title : "test",
+                                          link : "/test"
+                                        },
+                                        {
+                                          title : "Github",
+                                          link : "https://github.com/mtKeller/bilbo-backends"
+                                        }]} />
+            <br />
 
-          <div className="offset-1 col-lg-10">
-            <WordCloud className="text-center" init={this.state.initWordCloud}/>
-          </div>
+            <div className="offset-1 col-lg-10">
+              <WordCloud className="text-center" init={this.state.initWordCloud}/>
+            </div>
 
-          <div id="couple">
-            <img id="couple-pic" src="http://i.imgur.com/xO9lzhB.png"></img>
-          </div>
+            <div id="couple">
+              <img id="couple-pic" src="http://i.imgur.com/xO9lzhB.png"></img>
+            </div>
 
-          <div id="map-container">
-            <div className={"row text-center"} id="area-price">
-              <div className={"offset-lg-2 col-lg-4"} id="area">     
-                <Area />
-              </div>
+            <div id="map-container">
+              <div className={"row text-center"} id="area-price">
+                <div className={"offset-lg-2 col-lg-4"} id="area">     
+                  <Area />
+                </div>
 
-              <div className={"col-lg-4"} id="price">          
-                <Price />
+                <div className={"col-lg-4"} id="price">          
+                  <Price />
+                </div>
               </div>
             </div>
-          </div>
-          <div className={"row"}>
-            <div className={"col-lg-12"}>
-              <Container updatePosition={this.setPos.bind(this)} initialCenter={this.state.currentLocation} />
+
+            <div className={"row"}>
+              <div className={"col-lg-12"}>
+                <Container updatePosition={this.setPos.bind(this)} initialCenter={this.state.currentLocation} />
+              </div>
+              <Footer />
             </div>
-            <Footer />
+            
           </div>
-        </div>
-      } />
+        }/>
+      </Switch>
     </Router>)
   };
 }
