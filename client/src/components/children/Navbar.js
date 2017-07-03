@@ -25,7 +25,7 @@ class BootstrapNavbar extends React.Component {
 		
 		return (
 			<NavItem>
-				<NavLink href={item.link}>{item.title}</NavLink>
+				<NavLink key={item.title} href={item.link}>{item.title}</NavLink>
 			</NavItem>
 		);
 	}
@@ -33,6 +33,8 @@ class BootstrapNavbar extends React.Component {
     return (
       <div>
         <Navbar color="faded" light toggleable>
+          <img id="gopher" src="http://www.evanmiller.org/images/go-gopher3.png"></img>
+  
           <NavbarToggler right onClick={this.state.toggle} />
           <NavbarBrand href="/">{this.state.pageTitle}</NavbarBrand>
           <Collapse isOpen={this.state.isOpen} navbar>

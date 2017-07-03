@@ -6,14 +6,16 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import Navbar from "./components/children/Navbar";
-// import YoutubeBlock from './components/children/YoutubeBlock'
-import Demo from './components/Demo';
-// import Mapper from './components/Map';
-import GoogleMaps from './components/GoogleMaps'
+
+import Container from './components/Container';
+
 import WordCloud from './components/WordCloud'
 import Area from './components/children/Area'
 import Price from './components/children/Price'
 import Footer from './components/children/Footer'
+
+//helpers
+import places from "./helpers/googlePlaces";
 
 class App extends Component{
   constructor(props) {
@@ -22,7 +24,10 @@ class App extends Component{
     
     //Gets current time and continuously updates
     this.setTime();
-    
+    places.getPlaces().then((response)=> {
+      this.setMarkers(response);
+    });
+
     window.setInterval(function () {
       this.setTime();
     }.bind(this), 10000);
@@ -49,12 +54,25 @@ class App extends Component{
     console.log(food);
 
     this.state = {
-      priceLevel : 0,
+      priceLevel : [1,4],
+      range : 10000,
       lat : 32.792095,
       lng : -117.232337,
-      initWordCloud: food
+      initWordCloud: food,
+      markers: [null],
+      currentLocation: {lat: 32.74752299999999, lng: -117.1601377}
     }
+    console.log("Old state: ", this.state.currentLocation);
+    this.setLocation();
   }
+  //Set current map markers
+  setMarkers(data){
+    // this.setState({
+    //   markers : data.results
+    // })
+    console.log(this.state.markers, "fucker");
+  }
+
   //Sets current time
   setTime(){
   
@@ -81,6 +99,21 @@ class App extends Component{
       hours: hours,
       minutes: minutes,
     });
+  }
+
+  setLocation(){
+    console.log("setting location");
+    if (navigator && navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((pos) => {
+            const coords = pos.coords;
+            this.setState({
+                currentLocation: {
+                    lat: (coords.latitude !== undefined)? coords.latitude : 32.792095,
+                    lng: (coords.longitude !== undefined)? coords.longitude : -117.232337
+                }
+            })
+        })
+    }
   }
 
   getDefaultSearch(){
@@ -116,6 +149,13 @@ class App extends Component{
     }
   }
 
+  setPos(newCenter){
+    console.log("New center: " + newCenter);
+    this.setState({
+      currentLocation: newCenter
+    })
+  }
+
   render(){
   return (
     <Router>
@@ -136,30 +176,27 @@ class App extends Component{
               <WordCloud className="text-center" init={this.state.initWordCloud}/>
             </div>
 
-            <div className={"row text-center"} id="area-price">
-            
-                <Area />
-
-              <div className={"col-lg-4"} id="price">          
-                <Price />
-              </div>
+            <div id="couple">
+              <img id="couple-pic" src="http://i.imgur.com/xO9lzhB.png"></img>
             </div>
 
-            <button type="button" className={"btn btn-primary center-block"}>Find Restaurants</button>
+            <div id="map-container">
+              <div className={"row text-center"} id="area-price">
+                <div className={"offset-lg-2 col-lg-4"} id="area">     
+                  <Area />
+                </div>
+
+                <div className={"col-lg-4"} id="price">          
+                  <Price />
+                </div>
+              </div>
             <div className={"row"}>
-              <div className={"col-lg-1 kill-padding"}>
-                <button className="btn btn-outline-primary btn-sm float-lg-right square">
-                  <i className={"fa fa-bars"} aria-hidden={"true"}/>
-                </button>
+              <div className={"col-lg-12"}>
+                <Container updatePosition={this.setPos.bind(this)} initialCenter={this.state.currentLocation} />
               </div>
-              <div className={"col-lg-11 kill-padding"}>
-                <GoogleMaps lat={this.state.lat} lng={this.state.lng} />
-              </div>
+              <Footer />
             </div>
-            <Footer />
-
           </div>
-
         }/>
       </Switch>
     </Router>)
