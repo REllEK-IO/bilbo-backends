@@ -54,7 +54,7 @@ class App extends Component{
     console.log(food);
 
     this.state = {
-      priceLevel : [1,4],
+      priceLevel : 4,
       range : 10000,
       lat : 32.792095,
       lng : -117.232337,
