@@ -51,6 +51,8 @@ var styled = [
 ]
 
 class Maps extends Component {
+  map;
+
   constructor(props) {
     super(props);
 
@@ -69,6 +71,9 @@ class Maps extends Component {
 	componentDidUpdate(prevProps, prevState) {
     if (prevProps.google !== this.props.google) {
       this.loadMap();
+    }
+    if (prevState.currentLocation !== this.state.currentLocation) {
+      this.recenterMap();
     }
   }
 
@@ -100,6 +105,34 @@ class Maps extends Component {
     }
 	}
 
+  recenterMap() {
+    const map = this.map;
+    const lat = this.state.lat;
+    const lng = this.state.lng;
+
+    const google = this.props.google;
+    const maps = google.maps;
+
+    if (map) {
+        let center = new maps.LatLng(lat, lng)
+        map.panTo(center)
+    }
+  }
+
+  renderChildren() {
+    const {children} = this.props;
+
+    if (!children) return;
+
+    return React.Children.map(children, c => {
+      return React.cloneElement(c, {
+        map: this.map,
+        google: this.props.google,
+        mapCenter: this.props.initialCenter
+      });
+    })
+  }
+
   render() {
     const style = {
       height: "100%",
@@ -107,7 +140,8 @@ class Maps extends Component {
     }
     return (
       <div style={style} ref='map'>
-        Test
+        Loading Map...
+        {this.renderChildren()}
       </div>
     )
   }

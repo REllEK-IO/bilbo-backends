@@ -25,7 +25,7 @@ class BootstrapNavbar extends React.Component {
 		
 		return (
 			<NavItem>
-				<NavLink href={item.link}>{item.title}</NavLink>
+				<NavLink key={item.title} href={item.link}>{item.title}</NavLink>
 			</NavItem>
 		);
 	}

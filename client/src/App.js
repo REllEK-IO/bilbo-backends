@@ -108,7 +108,7 @@ class App extends Component{
       lng : -117.232337,
       initWordCloud: food,
       markers: [initialMarkerObj],
-      currentLocation: {lat: 32.792095, lng: -117.232337}
+      currentLocation: {lat: 32.74752299999999, lng: -117.1601377}
     }
     console.log("Old state: ", this.state.currentLocation);
     this.setLocation();
