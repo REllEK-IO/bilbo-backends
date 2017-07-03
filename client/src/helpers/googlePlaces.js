@@ -4,7 +4,7 @@ const APIKEY = "&key=AIzaSyCDr_MewjPJFGJVYUaj3RBy1E7rpE5nxR4";
 const QUERYURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
 
 var places = (function () {
-	var getPlaces = function (query, lat, lng, radius, minPrice, maxPrice, ) {
+	var getPlaces = function (query, lat, lng, radius, minPrice, maxPrice ) {
 		var searchQuery = query || "food";
 		var latitude = lat || 32.792095;
 		var longitude = lng || -117.232337;
