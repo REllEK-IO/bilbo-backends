@@ -6,10 +6,9 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import Navbar from "./components/children/Navbar";
-// import YoutubeBlock from './components/children/YoutubeBlock'
-import Demo from './components/Demo';
-// import Mapper from './components/Map';
-import GoogleMaps from './components/GoogleMaps'
+
+import Container from './components/Container';
+
 import WordCloud from './components/WordCloud'
 import Area from './components/children/Area'
 import Price from './components/children/Price'
@@ -17,11 +16,6 @@ import Footer from './components/children/Footer'
 
 //helpers
 import places from "./helpers/googlePlaces";
-
-const AnyReactComponent = ({ text }) => <div style={{
-    position: 'absolute', color: 'white', background: 'red',
-    height: 40, width: 60    
-  }}>{text}</div>;
 
 class App extends Component{
   constructor(props) {
@@ -113,8 +107,11 @@ class App extends Component{
       lat : 32.792095,
       lng : -117.232337,
       initWordCloud: food,
-      markers: [initialMarkerObj]
+      markers: [initialMarkerObj],
+      currentLocation: {lat: 32.74752299999999, lng: -117.1601377}
     }
+    console.log("Old state: ", this.state.currentLocation);
+    this.setLocation();
   }
   //Set current map markers
   setMarkers(data){
@@ -150,6 +147,21 @@ class App extends Component{
       hours: hours,
       minutes: minutes,
     });
+  }
+
+  setLocation(){
+    console.log("setting location");
+    if (navigator && navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((pos) => {
+            const coords = pos.coords;
+            this.setState({
+                currentLocation: {
+                    lat: (coords.latitude !== undefined)? coords.latitude : 32.792095,
+                    lng: (coords.longitude !== undefined)? coords.longitude : -117.232337
+                }
+            })
+        })
+    }
   }
 
   getDefaultSearch(){
@@ -220,19 +232,8 @@ class App extends Component{
             </div>
 
             <div className={"row"}>
-              <div className={"col-lg-1 kill-padding"}>
-                <button className="btn btn-outline-primary btn-sm float-lg-right square">
-                  <i className={"fa fa-bars"} aria-hidden={"true"}/>
-                </button>
-              </div>
-              <div className={"col-lg-11 kill-padding"}>
-                <GoogleMaps lat={this.state.lat} lng={this.state.lng}>
-                      <AnyReactComponent
-                        lat={this.state.lat}
-                        lng={this.state.lng}
-                        text={"TEST"}
-                      />
-                </GoogleMaps>
+              <div className={"col-lg-12"}>
+                <Container initialCenter={this.state.currentLocation} />
               </div>
             </div>
             <Footer />
