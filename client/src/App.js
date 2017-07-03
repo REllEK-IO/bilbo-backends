@@ -109,7 +109,7 @@ class App extends Component{
 
     this.state = {
       priceLevel : [1,4],
-      range : 0,
+      range : 10000,
       lat : 32.792095,
       lng : -117.232337,
       initWordCloud: food,
@@ -209,36 +209,36 @@ class App extends Component{
               <img id="couple-pic" src="http://i.imgur.com/xO9lzhB.png"></img>
             </div>
 
-            <div className={"row text-center"} id="area-price">
-              <div className={"offset-lg-2 col-lg-4"} id="area">     
-                <Area />
+            <div id="map-container">
+              <div className={"row text-center"} id="area-price">
+                <div className={"offset-lg-2 col-lg-4"} id="area">     
+                  <Area />
+                </div>
+
+                <div className={"col-lg-4"} id="price">          
+                  <Price />
+                </div>
               </div>
 
-              <div className={"col-lg-4"} id="price">          
-                <Price />
+              <div className={"row"}>
+                <div className={"col-lg-1 kill-padding"}>
+                  <button className="btn btn-outline-primary btn-sm float-lg-right square">
+                    <i className={"fa fa-bars"} aria-hidden={"true"}/>
+                  </button>
+                </div>
+                <div className={"col-lg-11 kill-padding"}>
+                  <GoogleMaps lat={this.state.lat} lng={this.state.lng}>
+                        <AnyReactComponent
+                          lat={this.state.lat}
+                          lng={this.state.lng}
+                          text={"TEST"}
+                        />
+                  </GoogleMaps>
+                </div>
               </div>
+              <Footer />
             </div>
-
-            <div className={"row"}>
-              <div className={"col-lg-1 kill-padding"}>
-                <button className="btn btn-outline-primary btn-sm float-lg-right square">
-                  <i className={"fa fa-bars"} aria-hidden={"true"}/>
-                </button>
-              </div>
-              <div className={"col-lg-11 kill-padding"}>
-                <GoogleMaps lat={this.state.lat} lng={this.state.lng}>
-                      <AnyReactComponent
-                        lat={this.state.lat}
-                        lng={this.state.lng}
-                        text={"TEST"}
-                      />
-                </GoogleMaps>
-              </div>
-            </div>
-            <Footer />
-
           </div>
-
         }/>
       </Switch>
     </Router>)
