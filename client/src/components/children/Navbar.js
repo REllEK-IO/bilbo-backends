@@ -34,6 +34,7 @@ class BootstrapNavbar extends React.Component {
       <div>
         <Navbar color="faded" light toggleable>
           <img id="gopher" src="http://www.evanmiller.org/images/go-gopher3.png"></img>
+  
           <NavbarToggler right onClick={this.state.toggle} />
           <NavbarBrand href="/">{this.state.pageTitle}</NavbarBrand>
           <Collapse isOpen={this.state.isOpen} navbar>

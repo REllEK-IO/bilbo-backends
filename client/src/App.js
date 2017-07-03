@@ -54,8 +54,8 @@ class App extends Component{
     console.log(food);
 
     this.state = {
-      priceLevel : 0,
-      range : 0,
+      priceLevel : [1,4],
+      range : 10000,
       lat : 32.792095,
       lng : -117.232337,
       initWordCloud: food,
@@ -162,7 +162,7 @@ class App extends Component{
       <Switch>
         <Route exact path="/" children={() => 
           <div>
-            <Navbar pageTitle={"GopherThat"} navItems={[{
+            <Navbar pageTitle={"Gopher That"} navItems={[{
                                           title : "test",
                                           link : "/test"
                                         },
@@ -176,25 +176,27 @@ class App extends Component{
               <WordCloud className="text-center" init={this.state.initWordCloud}/>
             </div>
 
-            <div className={"row text-center"} id="area-price">
-              <div className={"offset-lg-2 col-lg-4"} id="area">     
-                <Area />
-              </div>
-
-              <div className={"col-lg-4"} id="price">          
-                <Price />
-              </div>
+            <div id="couple">
+              <img id="couple-pic" src="http://i.imgur.com/xO9lzhB.png"></img>
             </div>
-            <h1 className={"text-center"}>{"lat: " + this.state.currentLocation.lat + " lng: " + this.state.currentLocation.lng}</h1>
+
+            <div id="map-container">
+              <div className={"row text-center"} id="area-price">
+                <div className={"offset-lg-2 col-lg-4"} id="area">     
+                  <Area />
+                </div>
+
+                <div className={"col-lg-4"} id="price">          
+                  <Price />
+                </div>
+              </div>
             <div className={"row"}>
               <div className={"col-lg-12"}>
                 <Container updatePosition={this.setPos.bind(this)} initialCenter={this.state.currentLocation} />
               </div>
+              <Footer />
             </div>
-            <Footer />
-
           </div>
-
         }/>
       </Switch>
     </Router>)
