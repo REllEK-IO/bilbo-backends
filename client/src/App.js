@@ -235,6 +235,7 @@ class App extends Component{
                         />
                   </GoogleMaps>
                 </div>
+                
               </div>
               <Footer />
             </div>
