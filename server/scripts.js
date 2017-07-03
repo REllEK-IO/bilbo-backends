@@ -2,6 +2,7 @@ import Word from "./models/word";
 
 const addArrayWords = function (arr, i) {
 	var word = arr[i].toString().toLowerCase();
+
 	Word.findOneAndUpdate(
 		{
 			"word": word
