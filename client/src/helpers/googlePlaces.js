@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const APIKEY = "&key=AIzaSyCDr_MewjPJFGJVYUaj3RBy1E7rpE5nxR4";
+const APIKEY = "&key=AIzaSyBBLDDJXchh7sPATHb2SSyZ_FFr_VQLqjU";
 const QUERYURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
 
 var places = (function () {
@@ -14,6 +14,9 @@ var places = (function () {
 
 		const STRUCTURED_QUERY = QUERYURL + "&location=" + latitude + "," + longitude + "&keyword=" + encodeURI(searchQuery) + "&" + "&radius=" + searchRadius +
 			"&opennow=true" + "&minprice=" + searchMinPrice + "&maxprice=" + searchMaxPrice + APIKEY;
+
+		console.log(STRUCTURED_QUERY);
+
 		var getCall = axios.get(STRUCTURED_QUERY)
 			.then(function (response) {
 				console.log(STRUCTURED_QUERY)
@@ -25,8 +28,25 @@ var places = (function () {
 		
 		return getCall;
 	}
+	var getPhoto = function(PHOTO_REFERENCE){
+		const QUERY_URL = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&photoreference="
+		+ PHOTO_REFERENCE + APIKEY;
+
+		console.log(QUERY_URL);
+
+		var getCall = axios.get(QUERY_URL)
+			.then(function (response) {
+				return response;
+			})
+			.catch(function (error) {
+				return error;
+			});
+		
+		return getCall;
+	}
 	return ({
-		getPlaces: getPlaces
+		getPlaces : getPlaces,
+		getPhoto : getPhoto
 	});
 })();
 

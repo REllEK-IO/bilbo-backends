@@ -13,6 +13,8 @@ import WordCloud from './components/WordCloud'
 import Area from './components/children/Area'
 import Price from './components/children/Price'
 import Footer from './components/children/Footer'
+import MarkerView from './components/MarkerView'
+import MarkerBlock from './components/children/MarkerBlock';
 
 //helpers
 import places from "./helpers/googlePlaces";
@@ -25,6 +27,7 @@ class App extends Component{
     //Gets current time and continuously updates
     this.setTime();
     places.getPlaces().then((response)=> {
+      console.log("check this fucker", response);
       this.setMarkers(response);
     });
 
@@ -59,17 +62,17 @@ class App extends Component{
       lat : 32.792095,
       lng : -117.232337,
       initWordCloud: food,
-      markers: [null],
+      markers: undefined,
       currentLocation: {lat: 32.74752299999999, lng: -117.1601377}
     }
     console.log("Old state: ", this.state.currentLocation);
     this.setLocation();
   }
   //Set current map markers
-  setMarkers(data){
-    // this.setState({
-    //   markers : data.results
-    // })
+  setMarkers(response){
+    this.setState({
+      markers : response.data.results
+    })
     console.log(this.state.markers, "fucker");
   }
 
@@ -156,6 +159,26 @@ class App extends Component{
     })
   }
 
+  renderMarkerBlocks(){
+    if(this.state.markers){
+      var dat = this;
+
+      var blocks = this.state.markers.map((place)=>{
+        if(place.photos){
+          if(place.photos["0"].photo_reference){
+            return (
+              <MarkerBlock title={place.name} img={"#"} />
+            );    
+          }
+        }
+        
+          
+        
+      });
+      return blocks;
+    }   
+  }
+
   render(){
   return (
     <Router>
@@ -196,9 +219,12 @@ class App extends Component{
               <div className={"col-lg-12"}>
                 <Container updatePosition={this.setPos.bind(this)} initialCenter={this.state.currentLocation} />
               </div>
-              <Footer />
+              
             </div>
-            
+            <MarkerView>
+              {this.renderMarkerBlocks()}
+            </MarkerView>
+            <Footer />
           </div>
         }/>
       </Switch>
