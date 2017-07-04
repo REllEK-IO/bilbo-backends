@@ -43,7 +43,7 @@ var randomWords = {
 	reduceArray: function (){
 		this.chooseTenRandom();
 		this.finalArray = _.sample(this.randomArray, 5);
-		console.log("Final Array: " + "\n");
+		console.log("Terms To Query: " + "\n");
 		this.formatLog(this.finalArray);
 		this.getFinalArray();
 	},
