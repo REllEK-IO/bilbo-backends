@@ -2,16 +2,17 @@ import React, {	Component } from 'react';
 
 class MarkerView extends Component{
 	  renderChildren() {
-			const {children} = this.props;
+			const CHILDREN = this.props.children;
 			
-			if (!children) return;
-			console.log("$$$ ", children);
-			return React.Children.map(children, c => {
-				return React.cloneElement(c, {
-					map: this.map,
-					google: this.props.google
-				});
+			if (!CHILDREN) return;
+			console.log("$$$ Render Children ", CHILDREN);
+			var childrenList = React.Children.map(CHILDREN, c => {
+				if(c){
+					return React.cloneElement(c, {});
+				}
 			})
+
+			return childrenList;
   	}
 		
 		render(){
