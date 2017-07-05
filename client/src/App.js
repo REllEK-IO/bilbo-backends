@@ -59,41 +59,47 @@ class App extends Component{
       defaultQuery : "food",
       markers: undefined,
       currentLocation: {lat: 32.74752299999999, lng: -117.1601377},
-      searchHistory : []
+      searchHistory : [],
+      appInit : false
     }
     
   }
 
   componentDidMount(){
-    this.setTime();
-
-    window.setInterval(function () {
+    if(!this.state.appInit){
       this.setTime();
-    }.bind(this), 10000);
 
-    window.setTimeout(function(){
-      this.setDefaultSearch();
-    }.bind(this), 500)
+      window.setInterval(function () {
+        this.setTime();
+      }.bind(this), 10000);
 
-    window.setTimeout(function(){
-        const PLACES_QUERY = {
-          query : this.state.defaultQuery,
-          lat : this.state.currentLocation.lat,
-          lng : this.state.currentLocation.lng,
-          radius : this.state.range,
-          minPrice : 0,
-          maxPrice : 4
-        }
-        console.log("init", PLACES_QUERY.query);
-        places.getPlaces(PLACES_QUERY).then((response)=> {
-            console.log("check this fucker", response);
-            this.setMarkers(response);
-        });
-    }.bind(this), 1000)
-    
+      window.setTimeout(function(){
+        this.setDefaultSearch();
+      }.bind(this), 500)
 
-    console.log("Old state: ", this.state.currentLocation);
-    this.setLocation();
+      window.setTimeout(function(){
+          const PLACES_QUERY = {
+            query : this.state.defaultQuery,
+            lat : this.state.currentLocation.lat,
+            lng : this.state.currentLocation.lng,
+            radius : this.state.range,
+            minPrice : 0,
+            maxPrice : 4
+          }
+          console.log("init", PLACES_QUERY.query);
+          places.getPlaces(PLACES_QUERY).then((response)=> {
+              console.log("check this fucker", response);
+              this.setMarkers(response);
+          });
+      }.bind(this), 1000)
+      
+
+      console.log("Old state: ", this.state.currentLocation);
+      this.setLocation();
+      this.setState({
+        appInit : true
+      })
+    }
   }
 
   //Set current map markers
@@ -105,14 +111,14 @@ class App extends Component{
         markers : response.data.results
       });
 
-      var arrRequest = Object.keys(this.state.markers).map((key => {
-        return places.getDetails(this.state.markers[key].id)
-      }));
+      // var arrRequest = Object.keys(this.state.markers).map((key => {
+      //   return places.getDetails(this.state.markers[key].place_id)
+      // }));
 
-      axios.all(arrRequest)
-        .then((allResponse)=>{
-          console.log("Find all " + allResponse);
-        });
+      // axios.all(arrRequest)
+      //   .then((allResponse)=>{
+      //     console.log("Find all " + allResponse);
+      //   });
     }
     
     console.log("$$$ Set Markers: " + this.state.markers);
