@@ -81,8 +81,8 @@ class Maps extends Component {
 		console.log("%%% " + (this.props !== undefined && this.props.google !== undefined));
     if (this.props !== undefined && this.props.google !== undefined) {
       // google is available
-      const google = this.props.google;
-      const maps = google.maps;
+      // const google = this.props.google;
+      // const maps = google.maps;
 
       const mapRef = this.refs.map;
       const node = ReactDOM.findDOMNode(mapRef);
@@ -95,14 +95,14 @@ class Maps extends Component {
 
       console.log("%%^%^% " + lat, lng);
 
-      const center = new maps.LatLng(lat, lng);
+      const center = new window.google.maps.LatLng(lat, lng);
       const mapConfig = Object.assign({}, {
         center: center,
         zoom: zoom,
         styles: styled
       })
 			
-      this.map = new maps.Map(node, mapConfig);
+      this.map = new window.google.maps.Map(node, mapConfig);
       // window.google.maps.map = this.map;
       
       //events
@@ -115,16 +115,16 @@ class Maps extends Component {
 	}
 
   recenterMap() {
-    const map = this.map;
+    // const map = this.map;
     const lat = this.state.lat;
     const lng = this.state.lng;
 
-    const google = this.props.google;
-    const maps = google.maps;
+    // const google = this.props.google;
+    // const maps = google.maps;
 
-    if (map) {
-        let center = new maps.LatLng(lat, lng)
-        map.panTo(center)
+    if (this.map) {
+        let center = new window.google.maps.LatLng(lat, lng)
+        this.map.panTo(center)
     }
   }
 
@@ -153,7 +153,6 @@ class Maps extends Component {
     return React.Children.map(children, c => {
       return React.cloneElement(c, {
         map: this.map,
-        google: this.props.google,
         mapCenter: this.props.initialCenter
       });
     })

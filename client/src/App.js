@@ -58,7 +58,8 @@ class App extends Component{
       initWordCloud: food,
       defaultQuery : "food",
       markers: undefined,
-      currentLocation: {lat: 32.74752299999999, lng: -117.1601377}
+      currentLocation: {lat: 32.74752299999999, lng: -117.1601377},
+      searchHistory : []
     }
     
   }
@@ -82,7 +83,8 @@ class App extends Component{
           radius : this.state.range,
           minPrice : 0,
           maxPrice : 4
-        } 
+        }
+        console.log("init", PLACES_QUERY.query);
         places.getPlaces(PLACES_QUERY).then((response)=> {
             console.log("check this fucker", response);
             this.setMarkers(response);
@@ -96,7 +98,7 @@ class App extends Component{
 
   //Set current map markers
   setMarkers(response){
-    if(response.data.results)
+    if(response.data.results !== undefined)
     {
 
       this.setState({
@@ -120,24 +122,25 @@ class App extends Component{
   setTime(){
   
   	var currentdate = new Date();
-  	var hours = currentdate.getUTCHours() + parseInt(this.props.UTCOffset, 10);    
-
+    //Set utc offset for PST
+  	var hours = currentdate.getUTCHours() - 8;    
+    // console.log("time", hours)
     // correct for number over 24, and negatives
     if( hours >= 24 ){ hours -= 24; }
     if( hours < 0   ){ hours += 12; }
 
     // add leading zero, first convert hours to string
-    hours = hours + "";
-    if( hours.length === 1 ){ hours = "0" + hours; }
+    // hours = String(hours);
+    // if( hours.length === 1 ){ hours = "0" + hours; }
 
     // minutes are the same on every time zone
     var minutes = currentdate.getUTCMinutes();
   
     // add leading zero, first convert hours to string
-    minutes = minutes + "";
-    if( minutes.length === 1 ){ minutes = "0" + minutes; }
+    // minutes = minutes + "";
+    // if( minutes.length === 1 ){ minutes = "0" + minutes; }
 
-    console.log(hours, minutes)
+    // console.log("!!!! The time is: ",hours, minutes)
     this.setState({
       hours: hours,
       minutes: minutes,
@@ -162,38 +165,45 @@ class App extends Component{
   setDefaultSearch(){
     if(this.state.hours > 5  && this.state.hours < 10){
       this.setState({
-        defaultQuery : "breakfast"
+        defaultQuery : "breakfast",
+        searchHistory : this.state.searchHistory.push("breakfast")
       })
     }
     else if(this.state.hours >= 10   && this.state.hours < 12){
       this.setState({
-        defaultQuery : "brunch"
+        defaultQuery : "brunch",
+        searchHistory : this.state.searchHistory.push("brunch")
       })
     }
-    else if(this.state.hours >= 12 && this.state.hours > 17){
+    else if(this.state.hours >= 12 && this.state.hours < 17){
       this.setState({
-        defaultQuery : "lunch"
+        defaultQuery : "lunch",
+        searchHistory : this.state.searchHistory.push("lunch")
       })
     }
-    else if(this.state.hours >= 17 && this.state.hours > 20){
+    else if(this.state.hours >= 17 && this.state.hours < 20){
       this.setState({
-        defaultQuery : "dinner"
+        defaultQuery : "dinner",
+        searchHistory : this.state.searchHistory.push("dinner")
       })
     }
-    else if(this.state.hours >= 20 && this.state.hours > 24){
+    else if(this.state.hours >= 20 && this.state.hours < 24){
       this.setState({
-        defaultQuery : "bars"
+        defaultQuery : "bars",
+        searchHistory : this.state.searchHistory.push("bars")
       })
     }
     else if(this.state.hours >= 0 && this.state.hours < 5){
       this.setState({
-        defaultQuery : "fast food"
+        defaultQuery : "fast food",
+        searchHistory : this.state.searchHistory.push("fast food")
       })
     }
+    console.log("default", this.state.hours, this.state.defaultQuery);
   }
 
   setPos(newCenter){
-    console.log("New center: " + newCenter);
+    console.log("New center: " + Object.keys(newCenter).map((key)=>(newCenter[key])));
     this.setState({
       currentLocation: newCenter
     })
@@ -203,20 +213,11 @@ class App extends Component{
     if(this.state.markers){
 
       var blocks = this.state.markers.map((place)=>{
-        var block;
-        if(place.photos){
-          if(place.photos["0"].photo_reference){
-            console.log("%% find data point " + Object.keys(place));
-            block = (
-              <MarkerBlock title={place.name} getImg={place.photos["0"].photo_reference} />
-            );    
-          }
-          else{
-            block = (
-              <MarkerBlock title={place.name} img={"#"} />
-            );
-          }
-        }
+        console.log("place id", place.place_id);
+        var block = (
+              <MarkerBlock placeId={place.place_id} title={place.name} />
+        );
+
         return block;
       });
       return blocks;

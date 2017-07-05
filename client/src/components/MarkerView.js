@@ -22,7 +22,7 @@ class MarkerView extends Component{
 			else{
 				return(
 					<div className={"row bg-info"}>
-						<div className={"offset-lg-1 col-lg-10 bg-faded"}>
+						<div className={"offset-lg-1 col-lg-10 bg-faded scroll"}>
 							{this.renderChildren()}
 						</div>
 					</div>
