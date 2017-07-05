@@ -1,8 +1,6 @@
 import React from 'react';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 
-import BootstrapNavItem from '../grandchildren/NavItem';
-
 class BootstrapNavbar extends React.Component {
   constructor(props) {
     super(props);
@@ -24,8 +22,8 @@ class BootstrapNavbar extends React.Component {
 		// }
 		
 		return (
-			<NavItem>
-				<NavLink key={item.title} href={item.link}>{item.title}</NavLink>
+			<NavItem key={item.title}>
+				<NavLink href={item.link}>{item.title}</NavLink>
 			</NavItem>
 		);
 	}
@@ -33,7 +31,7 @@ class BootstrapNavbar extends React.Component {
     return (
       <div>
         <Navbar color="faded" light toggleable>
-          <img id="gopher" src="http://www.evanmiller.org/images/go-gopher3.png"></img>
+          <img id="gopher" alt={"gopher"} src="http://www.evanmiller.org/images/go-gopher3.png"></img>
   
           <NavbarToggler right onClick={this.state.toggle} />
           <NavbarBrand href="/">{this.state.pageTitle}</NavbarBrand>

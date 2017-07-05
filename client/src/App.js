@@ -1,7 +1,7 @@
 import React, { Component  } from "react";
 // import {BrowserRouter as Router, Route} from "react-router-dom";
 // import './App.css';
-
+import axios from 'axios';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
@@ -13,6 +13,8 @@ import WordCloud from './components/WordCloud'
 import Area from './components/children/Area'
 import Price from './components/children/Price'
 import Footer from './components/children/Footer'
+import MarkerView from './components/MarkerView'
+import MarkerBlock from './components/children/MarkerBlock';
 
 //helpers
 import places from "./helpers/googlePlaces";
@@ -23,14 +25,9 @@ class App extends Component{
     // Operations usually carried out in componentWillMount go here
     
     //Gets current time and continuously updates
-    this.setTime();
-    places.getPlaces().then((response)=> {
-      this.setMarkers(response);
-    });
-
-    window.setInterval(function () {
-      this.setTime();
-    }.bind(this), 10000);
+    
+    
+    
 
     ////priceLevel
     //1 - 4 sets current return to this exact range
@@ -51,7 +48,7 @@ class App extends Component{
       return objFoodList;
     }
     var food = randomSizeList();
-    console.log(food);
+    // console.log(food);
 
     this.state = {
       priceLevel : 4,
@@ -59,25 +56,71 @@ class App extends Component{
       lat : 32.792095,
       lng : -117.232337,
       initWordCloud: food,
-      markers: [null],
+      defaultQuery : "food",
+      markers: undefined,
       currentLocation: {lat: 32.74752299999999, lng: -117.1601377}
     }
+    
+  }
+
+  componentDidMount(){
+    this.setTime();
+
+    window.setInterval(function () {
+      this.setTime();
+    }.bind(this), 10000);
+
+    window.setTimeout(function(){
+      this.setDefaultSearch();
+    }.bind(this), 500)
+
+    window.setTimeout(function(){
+        const PLACES_QUERY = {
+          query : this.state.defaultQuery,
+          lat : this.state.currentLocation.lat,
+          lng : this.state.currentLocation.lng,
+          radius : this.state.range,
+          minPrice : 0,
+          maxPrice : 4
+        } 
+        places.getPlaces(PLACES_QUERY).then((response)=> {
+            console.log("check this fucker", response);
+            this.setMarkers(response);
+        });
+    }.bind(this), 1000)
+    
+
     console.log("Old state: ", this.state.currentLocation);
     this.setLocation();
   }
+
   //Set current map markers
-  setMarkers(data){
-    // this.setState({
-    //   markers : data.results
-    // })
-    console.log(this.state.markers, "fucker");
+  setMarkers(response){
+    if(response.data.results)
+    {
+
+      this.setState({
+        markers : response.data.results
+      });
+
+      var arrRequest = Object.keys(this.state.markers).map((key => {
+        return places.getDetails(this.state.markers[key].id)
+      }));
+
+      axios.all(arrRequest)
+        .then((allResponse)=>{
+          console.log("Find all " + allResponse);
+        });
+    }
+    
+    console.log("$$$ Set Markers: " + this.state.markers);
   }
 
   //Sets current time
   setTime(){
   
   	var currentdate = new Date();
-  	var hours = currentdate.getUTCHours() + parseInt(this.props.UTCOffset);    
+  	var hours = currentdate.getUTCHours() + parseInt(this.props.UTCOffset, 10);    
 
     // correct for number over 24, and negatives
     if( hours >= 24 ){ hours -= 24; }
@@ -85,14 +128,14 @@ class App extends Component{
 
     // add leading zero, first convert hours to string
     hours = hours + "";
-    if( hours.length == 1 ){ hours = "0" + hours; }
+    if( hours.length === 1 ){ hours = "0" + hours; }
 
     // minutes are the same on every time zone
     var minutes = currentdate.getUTCMinutes();
   
     // add leading zero, first convert hours to string
     minutes = minutes + "";
-    if( minutes.length == 1 ){ minutes = "0" + minutes; }
+    if( minutes.length === 1 ){ minutes = "0" + minutes; }
 
     console.log(hours, minutes)
     this.setState({
@@ -116,7 +159,7 @@ class App extends Component{
     }
   }
 
-  getDefaultSearch(){
+  setDefaultSearch(){
     if(this.state.hours > 5  && this.state.hours < 10){
       this.setState({
         defaultQuery : "breakfast"
@@ -156,6 +199,33 @@ class App extends Component{
     })
   }
 
+  renderMarkerBlocks(){
+    if(this.state.markers){
+
+      var blocks = this.state.markers.map((place)=>{
+        var block;
+        if(place.photos){
+          if(place.photos["0"].photo_reference){
+            console.log("%% find data point " + Object.keys(place));
+            block = (
+              <MarkerBlock title={place.name} getImg={place.photos["0"].photo_reference} />
+            );    
+          }
+          else{
+            block = (
+              <MarkerBlock title={place.name} img={"#"} />
+            );
+          }
+        }
+        return block;
+      });
+      return blocks;
+    }
+    else{
+      return (<div></div>);
+    }
+  }
+
   render(){
   return (
     <Router>
@@ -177,7 +247,7 @@ class App extends Component{
             </div>
 
             <div id="couple">
-              <img id="couple-pic" src="http://i.imgur.com/xO9lzhB.png"></img>
+              <img id="couple-pic" src="http://i.imgur.com/xO9lzhB.png" alt={"gopher couple"}></img>
             </div>
 
             <div id="map-container">
@@ -196,9 +266,12 @@ class App extends Component{
               <div className={"col-lg-12"}>
                 <Container updatePosition={this.setPos.bind(this)} initialCenter={this.state.currentLocation} />
               </div>
-              <Footer />
+              
             </div>
-            
+            <MarkerView>
+              {this.renderMarkerBlocks()}
+            </MarkerView>
+            <Footer />
           </div>
         }/>
       </Switch>
