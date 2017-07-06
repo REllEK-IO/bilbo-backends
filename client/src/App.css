@@ -1,8 +1,8 @@
 body{
 	font-family: 'Roboto Condensed', sans-serif;
 	background-color: white;
-  background: url("https://www.xmple.com/wallpaper/blue-linear-gradient-white-2732x2048-c2-f5f5dc-87cefa-a-60-f-14.svg");
-  background-size: cover;
+  background: url("http://cdn-prod.heartfulness.org/hfnmag/images/the-evolution-of-consciousness-part-3.jpg");
+  background-size: 1% 350%;
 }
 
 h1,h2,h3,h4{
@@ -129,7 +129,7 @@ h1,h2,h3,h4{
 }
 
 #area-price {
-  background-color: #bfd3e4;
+  background-color: #98bcdb;
   padding-top: 14px;
   border: solid 1px #5d8eb8;
   height: 60px;
