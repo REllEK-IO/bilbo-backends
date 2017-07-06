@@ -1,6 +1,9 @@
 //======== Dependencies ==========
-
+var axios = require("axios");
 var _ = require("underscore");
+var Word = require("../models/word");
+const mongoose = require('mongoose');
+mongoose.Promise = Promise;
 
 //======== Array Variables ==============
 //var foodType=[];  // <----------Uncomment Pass in database query here
@@ -17,6 +20,26 @@ var randomWords = {
 	 "vegetables","buffet","cocktails","drinks","beer"],
 	randomArray: [],
 	finalArray: [],
+
+
+	// getWords: function(){
+
+
+	// 	Word.find({})
+	// 		.then((response) => {
+	// 			console.log("@@@Request for all words", response);
+	// 			// res.json(response);
+	// 		})
+	// 		.catch((err) => {
+	// 			console.log(err);
+	// 			// res.json({
+	// 			// 	"message": "---Something went wrong with the db",
+	// 			// 	"err": err
+	// 			// })
+			
+	// });
+		
+	// },
 	
 	chooseTenRandom: function(){
 		this.randomArray = _.sample(this.foodType, 10);
@@ -41,6 +64,7 @@ var randomWords = {
 	},
 
 	reduceArray: function (){
+		// this.getWords();
 		this.chooseTenRandom();
 		this.finalArray = _.sample(this.randomArray, 5);
 		console.log("Terms To Query: " + "\n");
@@ -76,7 +100,7 @@ var randomWords = {
 // 	var clear = randomWords.clearRandomArray();
 // }
 randomWords.generateWords();
-
+// randomWords.getWords();
 
 // ****** Checks to make sure randomArray clear is working *****
 // function checkClear () {

@@ -1,7 +1,8 @@
 body{
 	font-family: 'Roboto Condensed', sans-serif;
 	background-color: white;
-  background: url("https://s-media-cache-ak0.pinimg.com/originals/49/2e/dd/492edd38ce7000a98c7147525b1d2bf1.jpg");
+  background: url("http://cdn-prod.heartfulness.org/hfnmag/images/the-evolution-of-consciousness-part-3.jpg");
+  background-size: 1% 350%;
 }
 
 h1,h2,h3,h4{
@@ -76,17 +77,33 @@ h1,h2,h3,h4{
   padding-left: 50px;
 }
 
+<<<<<<< HEAD
+#get-new {
+  text-align: center;
+=======
 .marker-block{
   padding-top: 8px;
   border-bottom: 1px solid grey;
   box-shadow: 0 1px 1px silver;
   min-height: 125px;
+>>>>>>> 3fe9a2ec53f29abc28376867a2838e7ee4f89e9a
 }
 
 .myTagCloud {
   text-decoration: none;
   padding-top: 160px;
   width: 70%;
+}
+
+#reload {
+  background: white;
+  border: none;
+  margin-top: 15px;
+}
+
+#reload-pic {
+  height: 25px;
+  width: 25px;
 }
 
 /*
@@ -119,7 +136,7 @@ h1,h2,h3,h4{
 }
 
 #area-price {
-  background-color: #bfd3e4;
+  background-color: #98bcdb;
   padding-top: 14px;
   border: solid 1px #5d8eb8;
   height: 60px;
@@ -154,6 +171,12 @@ input[type=radio]:checked + label>img {
   border: 1px solid white;
   box-shadow: 0 0 4px 4px #517ba0;
 }
+
+button:focus {
+    border: none;
+    outline: none;
+}
+
 
 #singleimg {
   width: auto;

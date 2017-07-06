@@ -1,6 +1,6 @@
-import bodyParser from 'body-parser'
-import express from 'express'
-import path from 'path'
+var bodyParser = require ('body-parser');
+var express = require ('express');
+var path = require ('path');
 const app = express()
 
 app.use(bodyParser.json())

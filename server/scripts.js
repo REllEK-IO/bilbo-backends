@@ -68,7 +68,7 @@ const Scripts = (function(){
 			"fast food",
 			"soup",
 			"meat",
-			"barebeque",
+			"barbeque",
 			"vegetables",
 			"buffet",
 			"cocktails",
