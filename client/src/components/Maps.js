@@ -1,6 +1,8 @@
 import React ,{ Component} from 'react';
 import ReactDOM from 'react-dom';
 
+import Marker from './Marker';
+
 var styled = [
     {
         "featureType": "all",
@@ -51,16 +53,20 @@ var styled = [
 ]
 
 class Maps extends Component {
-  map;
 
   constructor(props) {
     super(props);
+
+    console.log(Object.keys(props).map((key)=>{
+      return props[key];
+    }));
 
     console.log("%%%%%     % ", this.props.initialCenter.lat);
 
     this.state = {
         lat: (this.props.initialCenter.lat !== undefined)? this.props.initialCenter.lat : 0,
-        lng: (this.props.initialCenter.lng !== undefined)? this.props.initialCenter.lng : 0
+        lng: (this.props.initialCenter.lng !== undefined)? this.props.initialCenter.lng : 0,
+        mapObj: undefined
     }
   }
 
@@ -75,14 +81,19 @@ class Maps extends Component {
     if (prevState.currentLocation !== this.state.currentLocation) {
       this.recenterMap();
     }
+    if(prevProps.markers !== this.props.markers){
+      this.setState({
+        markers : this.props.markers
+      })
+    }
   }
 
 	loadMap() {
 		console.log("%%% " + (this.props !== undefined && this.props.google !== undefined));
     if (this.props !== undefined && this.props.google !== undefined) {
       // google is available
-      const google = this.props.google;
-      const maps = google.maps;
+      // const google = this.props.google;
+      // const maps = google.maps;
 
       const mapRef = this.refs.map;
       const node = ReactDOM.findDOMNode(mapRef);
@@ -95,36 +106,43 @@ class Maps extends Component {
 
       console.log("%%^%^% " + lat, lng);
 
-      const center = new maps.LatLng(lat, lng);
+      const center = new window.google.maps.LatLng(lat, lng);
       const mapConfig = Object.assign({}, {
         center: center,
         zoom: zoom,
-        styles: styled
+        styles: styled,
+        scrollwheel: false
       })
 			
-      this.map = new maps.Map(node, mapConfig);
+      var mapObj = new window.google.maps.Map(node, mapConfig);
       // window.google.maps.map = this.map;
       
       //events
       const evtNames = ["dragend"];
 
       evtNames.forEach(e => {
-        this.map.addListener(e, this.handleEvent(e));
+        mapObj.addListener(e, this.handleEvent(e));
       });
+
+      this.setState({
+        mapObj: mapObj
+      })
+
+      console.log("map call", this.state.map);
     }
 	}
 
   recenterMap() {
-    const map = this.map;
+    // const map = this.map;
     const lat = this.state.lat;
     const lng = this.state.lng;
 
-    const google = this.props.google;
-    const maps = google.maps;
+    // const google = this.props.google;
+    // const maps = google.maps;
 
-    if (map) {
-        let center = new maps.LatLng(lat, lng)
-        map.panTo(center)
+    if (this.state.mapObj) {
+        let center = new window.google.maps.LatLng(lat, lng)
+        this.state.mapObj.panTo(center)
     }
   }
 
@@ -146,18 +164,24 @@ class Maps extends Component {
   }
 
   renderChildren() {
-    const {children} = this.props;
-    
-    if (!children) return;
-    console.log("$$$ ", children);
-    return React.Children.map(children, c => {
-      return React.cloneElement(c, {
-        map: this.map,
-        google: this.props.google,
-        mapCenter: this.props.initialCenter
-      });
-    })
-  }
+		var markerList;
+
+		if(this.state.markers && this.state.mapObj){
+      var index = 0;
+			markerList = this.state.markers.map((mark)=>{
+				// console.log("Child position", mark.geometry.location);
+				// var marked = (
+				// 	<Marker key={"marker" + index} position={mark.geometry.location} />
+				// );
+        // index++;
+        // return marked;
+        console.log("Marker List" + mark.geometry.location);
+        return <Marker mapObj={this.state.mapObj} position={mark.geometry.location}/>;
+			});
+      console.log("Marker List", markerList);
+		  return markerList;
+		}
+	}
 
   render() {
     const style = {
