@@ -53,7 +53,7 @@ var randomWords = {
 	removeDuplicates: function(arr){
 		var tempObj = {};
 		var j =1;
-		for(i =0; i < arr.length; i++){
+		for(var i =0; i < arr.length; i++){
 			tempObj[arr[i]] = j;
 			j++;
 		};
