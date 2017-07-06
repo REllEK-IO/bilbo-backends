@@ -4,10 +4,19 @@ class Marker extends Component {
 	constructor(props){
 		super(props);
 
+		var infoWindowContent = (
+			'<div id="content">' +
+				'<h3>Something</h3>' +
+				'<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus quo assumenda molestias, ut quis maxime soluta quia ad eligendi nihil numquam saepe, praesentium, eum placeat harum asperiores magni vitae. Molestiae numquam laudantium illum asperiores expedita deserunt.</p>' +
+			'</div>'
+		);
+
 		this.state = {
 			mapObj : this.props.mapObj || undefined,
 			markerObj : undefined,
-			position : this.props.position || undefined
+			position : this.props.position || undefined,
+			title : "Something",
+			infoWindowContent : infoWindowContent
 		}
 	}
 
@@ -47,7 +56,9 @@ class Marker extends Component {
 
 			const pref = {
 				map: map,
-				position: position
+				position: position,
+				title: this.state.title,
+				animation: window.google.maps.Animation.DROP
 			};
 
 			console.log("map obj", map);
@@ -56,6 +67,17 @@ class Marker extends Component {
 			this.setState({
 				markerObj : marker
 			})
+
+			var infoWindow = new window.google.maps.InfoWindow({
+      	content: this.state.infoWindowContent
+      });
+
+			marker.addListener('click', function() {
+      	infoWindow.open(map, marker);
+      });
+
+			this.props.storeMarkers(this.state.markerObj);
+
 			console.log(this.state.markerObj, "^^^^^^^^^^^^^6");
 		}
 
