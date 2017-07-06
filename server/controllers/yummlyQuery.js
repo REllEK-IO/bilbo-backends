@@ -97,10 +97,7 @@ var processQuery = {
 		 	}
 		  	console.log( "Search Results: " + "\n" );
 		  	formatLog (recipeArray); 
-		  	
-		
 			self.reduceArray(recipeArray);
-		// }));
 		});
 	},
 
@@ -117,16 +114,13 @@ var processQuery = {
 		var j =1;
 		for(i =0; i < array.length; i++){
 			tempObj[array[i]] = j;
-			
 			j++;
 		};
 		var final =[];
-		// console.log(final + " why wont it work")
 		for(var key in tempObj)
 			final.push(key);
 		console.log( "Array Without Duplicates: " + "\n");
 		formatLog(final);
-		// return this.final;
 		this.arrayToDisplay(final);
 	},
 
@@ -137,8 +131,11 @@ var processQuery = {
 		return this.finalArray;
 	},
 
+	getFinalArray: function(cb){
+		cb(this.finalArray);
+	}
  }
 
- processQuery.getRecipes();
+processQuery.getRecipes();
 
 module.exports = processQuery;
