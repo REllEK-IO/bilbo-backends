@@ -1,32 +1,62 @@
 import {	Component } from 'react';
 
 class Marker extends Component {
-	
+	constructor(props){
+		super(props);
+
+		this.state = {
+			mapObj : this.props.mapObj || undefined,
+			markerObj : undefined,
+			position : this.props.position || undefined
+		}
+	}
+
   componentDidUpdate(prevProps) {
-    if ((this.props.map !== prevProps.map) ||
+    if ((this.props.mapObj !== prevProps.mapObj) ||
       (this.props.position !== prevProps.position)) {
-        this.renderMarker();
+				if(this.props.mapObj){
+					this.setState({
+						mapObj : this.props.mapObj,
+						position : this.props.position
+					})
+
+					this.renderMarker();
+				}
     }
   }
 
-	renderMarker() {
-		if(this.props.google){
-			let {
-				map, position, mapCenter, google
-			} = this.props;
+	componentDidMount(){
+		if(this.state.mapObj && this.state.position){
+			this.renderMarker();
+			console.log("Marker Mounted");
+		}
+	}
 
-			let pos = position || mapCenter;
+	renderMarker() {
+		if(this.state.mapObj){
+			var position = this.state.position;
+
+			var map = this.state.mapObj;
+
+			let pos = position;
 			console.log("%^%^%   ", pos);
-			position = new google.maps.LatLng(pos.lat, pos.lng);
+			position = new window.google.maps.LatLng(pos.lat, pos.lng);
 
 			const pref = {
-				setMap: map,
+				map: map,
 				position: position
 			};
 
-			this.marker = new google.maps.Marker(pref);
-			console.log(this.marker, "^^^^^^^^^^^^^6");
+			console.log("map obj", map);
+			var marker = new window.google.maps.Marker(pref);
+
+			this.setState({
+				markerObj : marker
+			})
+			console.log(this.state.markerObj, "^^^^^^^^^^^^^6");
 		}
+
+		// console.log("map info", map);
 	}
 
 	render() {

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const APIKEY = "&key=AIzaSyC2Psvmdv8oTjN7-JIUCPePFhf9TGv4ed0";
+const APIKEY = "&key=AIzaSyBietDjB-k4HdgdPKDfHUrbRUv2Yng0C4E";
 const QUERYURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
 
 var places = (function () {
@@ -15,7 +15,7 @@ var places = (function () {
 		const STRUCTURED_QUERY = QUERYURL + "&location=" + latitude + "," + longitude + "&keyword=" + encodeURI(searchQuery) + "&radius=" + searchRadius +
 			"&opennow=true&minprice=" + searchMinPrice + "&maxprice=" + searchMaxPrice + APIKEY;
 
-		console.log(STRUCTURED_QUERY);
+		// console.log("Get places", STRUCTURED_QUERY);
 
 		var getCall = axios.get(STRUCTURED_QUERY)
 			.then(function (response) {
@@ -52,18 +52,19 @@ var places = (function () {
 		}
 	}
 
-	var getDetails = function(ID){
-		if(ID){
-			const QUERY_URL = "https://maps.googleapis.com/maps/api/place/details/json?placeid=" + ID + APIKEY;
+	var getDetails = function(PLACE_ID){
+		if(PLACE_ID !== undefined){
+			const QUERY_URL = "https://maps.googleapis.com/maps/api/place/details/json?placeid=" + PLACE_ID + APIKEY;
+			console.log("details url", PLACE_ID, QUERY_URL)
 			var getCall = axios.get(QUERY_URL)
-			.then(function (response) {
-				console.log("Stack Request for details " + response)
-				return response;
-			})
-			.catch(function (error) {
-				return error;
-			});		
-		return getCall;
+				.then(function (response) {
+					console.log("Stack Request for details " + response)
+					return response;
+				})
+				.catch(function (error) {
+					return error;
+				});		
+			return getCall;
 		}
 		else{
 			return null;
