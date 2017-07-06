@@ -52,7 +52,7 @@ class App extends Component{
 
     this.state = {
       priceLevel : 4,
-      range : 10000,
+      range : 1000,
       lat : 32.792095,
       lng : -117.232337,
       defaultQuery : "food",
@@ -64,6 +64,25 @@ class App extends Component{
       query : undefined
     }
     
+  }
+  
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.currentLocation !== this.state.currentLocation) {
+      console.log("update markers calleds", this.state.currentLocation);
+      this.updateSearch()
+    }
+    else if(prevState.query !== this.state.query){
+      console.log("query field updated", this.state.query);
+      this.updateSearch()
+    }
+    else if(prevState.priceLevel !== this.state.priceLevel){
+      console.log("price level updated", this.state.priceLevel);
+      this.updateSearch()
+    }
+    else if(prevState.range !== this.state.range){
+      console.log("range updated", this.state.range);
+      this.updateSearch();
+    }
   }
 
   componentDidMount(){
@@ -87,20 +106,45 @@ class App extends Component{
             minPrice : 0,
             maxPrice : 4
           }
-          console.log("init", PLACES_QUERY.query);
+          // console.log("init", PLACES_QUERY.query);
           places.getPlaces(PLACES_QUERY).then((response)=> {
-              console.log("check this fucker", response);
+              // console.log("check this fucker", response);
               this.setMarkers(response);
           });
       }.bind(this), 1000)
       
 
-      console.log("Old state: ", this.state.currentLocation);
+      // console.log("Old state: ", this.state.currentLocation);
       this.setLocation();
       this.setState({
         appInit : true
       })
     }
+  }
+
+  updateSearch(){
+    var self = this;
+    console.log("Updating search");
+    var timeout;
+    if (timeout) {
+      clearTimeout(timeout);
+      timeout = null;
+    }
+    timeout = setTimeout(() => {
+      places.getPlaces({
+        query : this.state.query,
+        lat : this.state.currentLocation.lat,
+        lng : this.state.currentLocation.lng,
+        radius : this.state.range,
+        minPrice : 0,
+        maxPrice : this.state.maxPrice
+      }).then((response)=>{
+        self.setMarkers(response);
+        console.log("Setting new markers");
+      }).catch((error)=>{
+        console.log("Error updating new place search", error)
+      })
+    }, 1000);
   }
 
   //Set current map markers
@@ -122,15 +166,15 @@ class App extends Component{
       //   });
     }
     
-    console.log("$$$ Set Markers: " + this.state.markers);
+    // console.log("$$$ Set Markers: " + this.state.markers);
   }
 
   //Sets current time
   setTime(){
   
-  	var currentdate = new Date();
+  	var currentDate = new Date();
     //Set utc offset for PST
-  	var hours = currentdate.getUTCHours() - 8;    
+  	var hours = currentDate.getUTCHours() - 8;    
     // console.log("time", hours)
     // correct for number over 24, and negatives
     if( hours >= 24 ){ hours -= 24; }
@@ -141,7 +185,7 @@ class App extends Component{
     // if( hours.length === 1 ){ hours = "0" + hours; }
 
     // minutes are the same on every time zone
-    var minutes = currentdate.getUTCMinutes();
+    var minutes = currentDate.getUTCMinutes();
   
     // add leading zero, first convert hours to string
     // minutes = minutes + "";
@@ -155,7 +199,7 @@ class App extends Component{
   }
 
   setLocation(){
-    console.log("setting location");
+    // console.log("setting location");
     if (navigator && navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((pos) => {
             const coords = pos.coords;
@@ -206,21 +250,26 @@ class App extends Component{
         searchHistory : this.state.searchHistory.push("fast food")
       })
     }
-    console.log("default", this.state.hours, this.state.defaultQuery);
+    // console.log("default", this.state.hours, this.state.defaultQuery);
   }
 
   setPos(newCenter){
-    console.log("New center: " + Object.keys(newCenter).map((key)=>(newCenter[key])));
+    // console.log("New center: " + Object.keys(newCenter).map((key)=>(newCenter[key])));
     this.setState({
       currentLocation: newCenter
     })
+  }
+
+  handlePosChange(newCenter){
+    // console.log("Position changed in Maps passed to APP Success", newCenter);
+    this.setPos({lat : newCenter.lat(), lng : newCenter.lng()});
   }
 
   renderMarkerBlocks(){
     if(this.state.markers){
 
       var blocks = this.state.markers.map((place)=>{
-        console.log("place id", place.place_id);
+        // console.log("place id", place.place_id);
         var block = (
               <MarkerBlock placeId={place.place_id} title={place.name} />
         );
@@ -268,7 +317,7 @@ class App extends Component{
 
             <div className={"row"}>
               <div className={"col-lg-12"}>
-                <Container markers={this.state.markers} updatePosition={this.setPos.bind(this)} initialCenter={this.state.currentLocation} />
+                <Container handlePosChange={this.handlePosChange.bind(this)} markers={this.state.markers} updatePosition={this.setPos.bind(this)} initialCenter={this.state.currentLocation} />
               </div>
               
             </div>
