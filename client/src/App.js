@@ -104,14 +104,14 @@ class App extends Component{
             lng : this.state.currentLocation.lng,
             radius : this.state.range,
             minPrice : 0,
-            maxPrice : 4
+            maxPrice : this.state.maxPrice
           }
           // console.log("init", PLACES_QUERY.query);
           places.getPlaces(PLACES_QUERY).then((response)=> {
               // console.log("check this fucker", response);
               this.setMarkers(response);
           });
-      }.bind(this), 1000)
+      }.bind(this), 600)
       
 
       // console.log("Old state: ", this.state.currentLocation);
@@ -144,7 +144,7 @@ class App extends Component{
       }).catch((error)=>{
         console.log("Error updating new place search", error)
       })
-    }, 1000);
+    }, 300);
   }
 
   //Set current map markers
