@@ -216,6 +216,11 @@ class App extends Component{
     })
   }
 
+  handlePosChange(newCenter){
+    console.log("Position changed in Maps passed to APP Success", newCenter);
+    this.setPos({lat : newCenter.lat(), lng : newCenter.lng()});
+  }
+
   renderMarkerBlocks(){
     if(this.state.markers){
 
@@ -268,7 +273,7 @@ class App extends Component{
 
             <div className={"row"}>
               <div className={"col-lg-12"}>
-                <Container markers={this.state.markers} updatePosition={this.setPos.bind(this)} initialCenter={this.state.currentLocation} />
+                <Container handlePosChange={this.handlePosChange.bind(this)} markers={this.state.markers} updatePosition={this.setPos.bind(this)} initialCenter={this.state.currentLocation} />
               </div>
               
             </div>

@@ -164,9 +164,9 @@ class Maps extends Component {
   }
 
   handleDragend(){
-    console.log("New center", this.state.mapObj.getCenter())
-    // var newCoords = this.state.mapObj.getCenter(); 
-    // props.updatePosition({lat: newCoords.lat(), lng: newCoords.lng()})
+    // console.log("New center", this.state.mapObj.getCenter())
+    var newCoords = this.state.mapObj.getCenter();
+    this.props.handlePosChange(newCoords);
   }
 
   renderChildren() {
