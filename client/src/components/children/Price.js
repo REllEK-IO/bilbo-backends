@@ -18,9 +18,10 @@ class Price extends React.Component {
   }
     render() {
         return (
+
           <form id="price">
             <div id="dollar-signs">
-            
+
               <input type="radio" name="priceLevel" id="single" className="input-hidden" onClick={this.handlePrice} value={1}/>
               <label htmlFor="single">
                 <img id = "singleimg" alt="cheap" src="http://i.imgur.com/R4tQY0v.png"/>
@@ -48,7 +49,8 @@ class Price extends React.Component {
 
             </div>
           </form>
-        );
+
+      )
     }
 };
 
