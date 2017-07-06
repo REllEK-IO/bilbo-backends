@@ -31,6 +31,9 @@ class Marker extends Component {
 			console.log("Marker Mounted");
 		}
 	}
+	componentWillUnmount(){
+		this.state.markerObj.setMap(null);
+	}
 
 	renderMarker() {
 		if(this.state.mapObj){
