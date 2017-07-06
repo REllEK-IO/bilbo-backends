@@ -77,16 +77,15 @@ h1,h2,h3,h4{
   padding-left: 50px;
 }
 
-<<<<<<< HEAD
 #get-new {
   text-align: center;
-=======
+}
+
 .marker-block{
   padding-top: 8px;
   border-bottom: 1px solid grey;
   box-shadow: 0 1px 1px silver;
   min-height: 125px;
->>>>>>> 3fe9a2ec53f29abc28376867a2838e7ee4f89e9a
 }
 
 .myTagCloud {

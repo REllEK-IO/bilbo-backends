@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { TagCloud } from "react-tagcloud";
 import 'bootstrap/dist/css/bootstrap.css';
+import Reload from './children/Reload'
 
 const options = {
   luminosity: 'light',
@@ -25,9 +26,7 @@ class WordCloud extends Component{
                 tags={this.state.wordCloudValue}
                 style={{width: 500, textAlign: 'center'}}
                 className="myTagCloud center-block text-center" />
-                <center>
-                  <button id="reload"><img id="reload-pic" src="http://downloadicons.net/sites/default/files/anticlockwise-arrow-icon-94745.png"></img></button>
-                </center>
+                <Reload />
       </div>
     );
   }
