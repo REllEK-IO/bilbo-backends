@@ -62,31 +62,28 @@ h1,h2,h3,h4{
 }
 
 .word-box{
+  /*
   background: url("http://i.imgur.com/rgdgtnD.png");
+  */
+  background: url("http://i.imgur.com/sHSFbCa.png");
   background-color: ;
   background-size: contain;
-  width: auto;
-  height: 600px;
+  width: 1200px;
+  height: 750px;
   background-repeat: no-repeat;
   margin-bottom: 0px;
-  background-position: center; 
-  /*
-  margin-top: 50px;
-	height: 300px;
-	margin-bottom: 75px;
-	background-color: #0a1823;
-	border-radius: 50%;
-  box-shadow: 0 0 40px 40px #091722;
-  padding-top: 40px;
-  */
+  background-position: cover;
+  background-size: 100% 145%;
+  padding-left: 50px;
 }
 
 .myTagCloud {
   text-decoration: none;
-  padding-top: 155px;
+  padding-top: 160px;
   width: 70%;
 }
 
+/*
 #couple-pic {
   margin-bottom: 10px;
   float: right;
@@ -95,6 +92,7 @@ h1,h2,h3,h4{
   width: auto;
   margin-top: 0px;
 }
+*/
 
 #map-container {
   clear: right;
