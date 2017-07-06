@@ -22,17 +22,17 @@ class Area extends React.Component {
 
               <input type="radio" name="range" id="walk" className="input-hidden" value={1000} onClick={this.handleChange}/>
               <label htmlFor="walk">
-                <img id = "singleimg" alt="Walking Distance" src="https://d30y9cdsu7xlg0.cloudfront.net/png/15371-200.png"/>
+                <img className= "area-img" alt="Walking Distance" src="https://d30y9cdsu7xlg0.cloudfront.net/png/15371-200.png"/>
               </label>
 
               <input type="radio" name="range" id="bike" className="input-hidden" value={2000} onClick={this.handleChange}/>
               <label htmlFor="bike">
-                <img id = "doubleimg" alt="Biking Distance" src="https://cdn3.iconfinder.com/data/icons/bikecons/512/bikecons_tri-512.png"/>
+                <img className= "area-img" alt="Biking Distance" src="https://cdn3.iconfinder.com/data/icons/bikecons/512/bikecons_tri-512.png"/>
               </label>
 
               <input type="radio" name="range" id="car" className="input-hidden" value={10000} onClick={this.handleChange}/>
               <label htmlFor="car">
-                <img id = "tripleimg" alt="Driving Distance" src="http://i.imgur.com/CqXp2vO.png"/>
+                <img className= "area-img" alt="Driving Distance" src="http://i.imgur.com/CqXp2vO.png"/>
               </label>
 
               <a id="question-marks" data-tip data-for='area-mark'><img id="more-info" alt="More Info" src="https://image.flaticon.com/icons/png/512/0/827.png"/></a>

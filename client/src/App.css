@@ -103,7 +103,7 @@ h1,h2,h3,h4{
 
 .myTagCloud {
   text-decoration: none;
-  padding-top: 160px;
+  padding-top: 150px;
   width: 70%;
 }
 
@@ -189,33 +189,40 @@ button:focus {
     outline: none;
 }
 
-
-#singleimg {
+.area-img {
   width: auto;
   height: 30px;
   transition: 500ms all;
   margin-right: 18px;
+}
+
+
+#singleimg {
+  width: auto;
+  height: 25px;
+  transition: 500ms all;
+  margin-right: 19px;
 }
 
 #doubleimg {
   width: auto;
-  height: 30px;
+  height: 25px;
   transition: 500ms all;
-  margin-right: 18px;
+  margin-right: 19px;
 }
 
 #tripleimg {
   width: auto;
-  height: 30px;
+  height: 25px;
   transition: 500ms all;
-  margin-right: 18px;
+  margin-right: 19px;
 }
 
 #quadimg {
   width: auto;
-  height: 30px;
+  height: 25px;
   transition: 500ms all;
-  margin-right: 18px;
+  margin-right: 15px;
 }
 
 #ui-content {
