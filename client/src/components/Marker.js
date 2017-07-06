@@ -5,17 +5,19 @@ class Marker extends Component {
 		super(props);
 
 		this.state = {
-			mapObj : undefined,
-			markerObj : undefined
+			mapObj : this.props.mapObj || undefined,
+			markerObj : undefined,
+			position : this.props.position || undefined
 		}
 	}
 
   componentDidUpdate(prevProps) {
-    if ((this.props.map !== prevProps.map) ||
+    if ((this.props.mapObj !== prevProps.mapObj) ||
       (this.props.position !== prevProps.position)) {
 				if(this.props.mapObj){
 					this.setState({
-						mapObj : this.props.mapObj
+						mapObj : this.props.mapObj,
+						position : this.props.position
 					})
 
 					this.renderMarker();
@@ -23,15 +25,20 @@ class Marker extends Component {
     }
   }
 
+	componentDidMount(){
+		if(this.state.mapObj && this.state.position){
+			this.renderMarker();
+			console.log("Marker Mounted");
+		}
+	}
+
 	renderMarker() {
 		if(this.state.mapObj){
-			let {
-				map, position, mapCenter
-			} = this.props;
+			var position = this.state.position;
 
-			var map = this.props.mapObj;
+			var map = this.state.mapObj;
 
-			let pos = position || mapCenter;
+			let pos = position;
 			console.log("%^%^%   ", pos);
 			position = new window.google.maps.LatLng(pos.lat, pos.lng);
 

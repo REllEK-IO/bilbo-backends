@@ -271,7 +271,7 @@ class App extends Component{
 
             <div className={"row"}>
               <div className={"col-lg-12"}>
-                <Container updatePosition={this.setPos.bind(this)} initialCenter={this.state.currentLocation} />
+                <Container markers={this.state.markers} updatePosition={this.setPos.bind(this)} initialCenter={this.state.currentLocation} />
               </div>
               
             </div>

@@ -81,6 +81,11 @@ class Maps extends Component {
     if (prevState.currentLocation !== this.state.currentLocation) {
       this.recenterMap();
     }
+    if(prevProps.markers !== this.props.markers){
+      this.setState({
+        markers : this.props.markers
+      })
+    }
   }
 
 	loadMap() {
@@ -105,7 +110,8 @@ class Maps extends Component {
       const mapConfig = Object.assign({}, {
         center: center,
         zoom: zoom,
-        styles: styled
+        styles: styled,
+        scrollwheel: false
       })
 			
       var mapObj = new window.google.maps.Map(node, mapConfig);
@@ -158,15 +164,24 @@ class Maps extends Component {
   }
 
   renderChildren() {
-    const {children} = this.props;
-    var self = this;
-    if (!children) return;
+		var markerList;
 
-    console.log("$$$ ", children);
-    return React.Children.map(children, c => {
-      return (<Marker mapObj={this.state.mapObj} position={{lat : this.state.lat, lng : this.state.lng}} />);
-    })
-  }
+		if(this.state.markers && this.state.mapObj){
+      var index = 0;
+			markerList = this.state.markers.map((mark)=>{
+				// console.log("Child position", mark.geometry.location);
+				// var marked = (
+				// 	<Marker key={"marker" + index} position={mark.geometry.location} />
+				// );
+        // index++;
+        // return marked;
+        console.log("Marker List" + mark.geometry.location);
+        return <Marker mapObj={this.state.mapObj} position={mark.geometry.location}/>;
+			});
+      console.log("Marker List", markerList);
+		  return markerList;
+		}
+	}
 
   render() {
     const style = {
