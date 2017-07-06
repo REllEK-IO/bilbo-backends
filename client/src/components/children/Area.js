@@ -5,7 +5,7 @@ class Area extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      range: 10000
+      range: 1000
     };
     this.handleChange = this.handleChange.bind(this);
   }

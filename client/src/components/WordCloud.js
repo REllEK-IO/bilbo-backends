@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Reload from './children/Reload'
 
 const options = {
-  luminosity: 'light',
+  luminosity: 'medium',
   hue: 'blue'
 };
  
@@ -20,11 +20,11 @@ class WordCloud extends Component{
   render(){
     return(
       <div className={"col-lg-12 word-box"}>
-      <TagCloud minSize={12}
-                maxSize={35}
+      <TagCloud minSize={17}
+                maxSize={37}
                 colorOptions={options}
                 tags={this.state.wordCloudValue}
-                style={{width: 500, textAlign: 'center'}}
+                style={{width: 600, textAlign: 'center'}}
                 className="myTagCloud center-block text-center" />
                 <Reload />
       </div>

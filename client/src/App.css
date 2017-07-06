@@ -1,8 +1,21 @@
 body{
-	font-family: 'Roboto Condensed', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 	background-color: white;
+  /*
+  background: url("http://www.teamrvexpress.com/wp-content/uploads/2015/03/OpenRoadBG.jpg");
+  background-size: 140%;
+  */
+
+  /*
+  background: url("https://ak9.picdn.net/shutterstock/videos/5120567/thumb/1.jpg");
+  background-size: 100% 50%;
+  */
+
+
   background: url("http://cdn-prod.heartfulness.org/hfnmag/images/the-evolution-of-consciousness-part-3.jpg");
-  background-size: 1% 350%;
+  background-size: 1% 300%;
+
+
 }
 
 h1,h2,h3,h4{

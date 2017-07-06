@@ -52,7 +52,7 @@ class App extends Component{
 
     this.state = {
       priceLevel : 4,
-      range : 10000,
+      range : 1000,
       lat : 32.792095,
       lng : -117.232337,
       initWordCloud: food,
