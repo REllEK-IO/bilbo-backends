@@ -55,12 +55,13 @@ class App extends Component{
       range : 10000,
       lat : 32.792095,
       lng : -117.232337,
-      initWordCloud: food,
       defaultQuery : "food",
       markers: undefined,
       currentLocation: {lat: 32.74752299999999, lng: -117.1601377},
       searchHistory : [],
-      appInit : false
+      appInit : false,
+      initWordCloud: food,
+      query : undefined
     }
     
   }

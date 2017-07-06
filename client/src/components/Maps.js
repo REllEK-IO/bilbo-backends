@@ -156,11 +156,17 @@ class Maps extends Component {
         timeout = null;
       }
       timeout = setTimeout(() => {
-        if (this.props[handlerName]) {
-          this.props[handlerName](this.props, this.map, e);
+        if (handlerName === "dragend") {
+          this.handleDragend();
         }
       }, 1000);
     }
+  }
+
+  handleDragend(){
+    console.log("New center", this.state.mapObj.getCenter())
+    // var newCoords = this.state.mapObj.getCenter(); 
+    // props.updatePosition({lat: newCoords.lat(), lng: newCoords.lng()})
   }
 
   renderChildren() {
