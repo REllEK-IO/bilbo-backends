@@ -15,6 +15,7 @@ class Area extends React.Component {
     this.setState(newState);
     console.log("Range State: Within", newState.range, "meters");
   }
+
     render() {
         return (
           <form id="area">
@@ -44,6 +45,9 @@ class Area extends React.Component {
           </form>
         );
     }
+
 };
+
+
 
 export default Area;

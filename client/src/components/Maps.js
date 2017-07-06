@@ -66,7 +66,8 @@ class Maps extends Component {
     this.state = {
         lat: (this.props.initialCenter.lat !== undefined)? this.props.initialCenter.lat : 0,
         lng: (this.props.initialCenter.lng !== undefined)? this.props.initialCenter.lng : 0,
-        mapObj: undefined
+        mapObj: undefined,
+        markerObjs: []
     }
   }
 
@@ -82,8 +83,12 @@ class Maps extends Component {
       this.recenterMap();
     }
     if(prevProps.markers !== this.props.markers){
+      
+      this.deleteMarkers();
+      
       this.setState({
-        markers : this.props.markers
+        markers : this.props.markers,
+        markerObjs : []
       })
     }
   }
@@ -97,8 +102,6 @@ class Maps extends Component {
 
       const mapRef = this.refs.map;
       const node = ReactDOM.findDOMNode(mapRef);
-
-      
 
       let zoom = 14;
       let lat = this.state.lat;
@@ -132,6 +135,18 @@ class Maps extends Component {
     }
 	}
 
+  storeMarkers(markerObj){
+    this.setState({
+      markerObjs : this.state.markerObjs.push(markerObj)
+    })
+  }
+
+  deleteMarkers(){
+    for(var i = 0; i < this.state.markerObjs.length; i++){
+      this.state.markerObjs[i].setMap(null);
+    }
+  }
+  
   recenterMap() {
     // const map = this.map;
     const lat = this.state.lat;
@@ -156,14 +171,21 @@ class Maps extends Component {
         timeout = null;
       }
       timeout = setTimeout(() => {
-        if (this.props[handlerName]) {
-          this.props[handlerName](this.props, this.map, e);
+        if (handlerName === "dragend") {
+          this.handleDragend();
         }
       }, 1000);
     }
   }
 
+  handleDragend(){
+    // console.log("New center", this.state.mapObj.getCenter())
+    var newCoords = this.state.mapObj.getCenter();
+    this.props.handlePosChange(newCoords);
+  }
+
   renderChildren() {
+
 		var markerList;
 
 		if(this.state.markers && this.state.mapObj){
@@ -176,7 +198,7 @@ class Maps extends Component {
         // index++;
         // return marked;
         console.log("Marker List" + mark.geometry.location);
-        return <Marker mapObj={this.state.mapObj} position={mark.geometry.location}/>;
+        return <Marker storeMarkers={this.storeMarkers.bind(this)} mapObj={this.state.mapObj} position={mark.geometry.location}/>;
 			});
       console.log("Marker List", markerList);
 		  return markerList;

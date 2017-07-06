@@ -1,4 +1,5 @@
 var Word = require("../models/word");
+var yummly = require("../controllers/yummlyQuery");
 
 const addArrayWords = function (arr, i) {
 	word = arr[i].toString().toLowerCase();
@@ -80,4 +81,8 @@ module.exports = function (app) {
 				})
 			})
 	});
+
+	app.get("/api/yummly", function (req,res){
+		yummly.getFinalArray(res.json);
+	})
 }
