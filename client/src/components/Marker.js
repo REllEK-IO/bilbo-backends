@@ -57,7 +57,8 @@ class Marker extends Component {
 			const pref = {
 				map: map,
 				position: position,
-				title: this.state.title
+				title: this.state.title,
+				animation: window.google.maps.Animation.DROP
 			};
 
 			console.log("map obj", map);

@@ -151,19 +151,36 @@ class App extends Component{
   setMarkers(response){
     if(response.data.results !== undefined)
     {
+      var self = this;
 
-      this.setState({
-        markers : response.data.results
-      });
+      // self.setState({
+      //   markers: response.data.results
+      // })
 
-      // var arrRequest = Object.keys(this.state.markers).map((key => {
-      //   return places.getDetails(this.state.markers[key].place_id)
-      // }));
+      var arrRequest = Object.keys(response.data.results).map((key => {
+        return places.getDetails(response.data.results[key].place_id)
+      }));
 
-      // axios.all(arrRequest)
-      //   .then((allResponse)=>{
-      //     console.log("Find all " + allResponse);
-      //   });
+      axios.all(arrRequest)
+        .then((allResponse)=>{
+          var parsedResponse = Object.keys(allResponse).map((key)=>{
+            if(allResponse[key].data.result){
+              return allResponse[key].data.result;
+            }
+            else{
+              return null
+            }
+
+            
+          });
+
+          console.log("find all", parsedResponse)
+
+          self.setState({
+            markers : parsedResponse
+          });
+        })
+        .catch(error => (console.log(error)));
     }
     
     // console.log("$$$ Set Markers: " + this.state.markers);
