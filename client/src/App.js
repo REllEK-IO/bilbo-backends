@@ -253,10 +253,6 @@ class App extends Component{
               <WordCloud className="text-center" init={this.state.initWordCloud}/>
             </div>
 
-            <div id="couple">
-              <img id="couple-pic" src="http://i.imgur.com/xO9lzhB.png" alt={"gopher couple"}></img>
-            </div>
-
             <div id="map-container">
               <div className={"row text-center"} id="area-price">
                 <div className={"offset-lg-2 col-lg-4"} id="area">     

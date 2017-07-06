@@ -72,9 +72,9 @@ var randomWords = {
 
 
 //Runs method to clear the randomArray
-function clearWords () {
-	var clear = randomWords.clearRandomArray();
-}
+// function clearWords () {
+// 	var clear = randomWords.clearRandomArray();
+// }
 randomWords.generateWords();
 
 
