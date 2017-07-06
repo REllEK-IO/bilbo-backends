@@ -1,6 +1,8 @@
 import React ,{ Component} from 'react';
 import ReactDOM from 'react-dom';
 
+import Marker from './Marker';
+
 var styled = [
     {
         "featureType": "all",
@@ -51,16 +53,20 @@ var styled = [
 ]
 
 class Maps extends Component {
-  map;
 
   constructor(props) {
     super(props);
+
+    console.log(Object.keys(props).map((key)=>{
+      return props[key];
+    }));
 
     console.log("%%%%%     % ", this.props.initialCenter.lat);
 
     this.state = {
         lat: (this.props.initialCenter.lat !== undefined)? this.props.initialCenter.lat : 0,
-        lng: (this.props.initialCenter.lng !== undefined)? this.props.initialCenter.lng : 0
+        lng: (this.props.initialCenter.lng !== undefined)? this.props.initialCenter.lng : 0,
+        mapObj: undefined
     }
   }
 
@@ -102,15 +108,21 @@ class Maps extends Component {
         styles: styled
       })
 			
-      this.map = new window.google.maps.Map(node, mapConfig);
+      var mapObj = new window.google.maps.Map(node, mapConfig);
       // window.google.maps.map = this.map;
       
       //events
       const evtNames = ["dragend"];
 
       evtNames.forEach(e => {
-        this.map.addListener(e, this.handleEvent(e));
+        mapObj.addListener(e, this.handleEvent(e));
       });
+
+      this.setState({
+        mapObj: mapObj
+      })
+
+      console.log("map call", this.state.map);
     }
 	}
 
@@ -122,9 +134,9 @@ class Maps extends Component {
     // const google = this.props.google;
     // const maps = google.maps;
 
-    if (this.map) {
+    if (this.state.mapObj) {
         let center = new window.google.maps.LatLng(lat, lng)
-        this.map.panTo(center)
+        this.state.mapObj.panTo(center)
     }
   }
 
@@ -147,14 +159,12 @@ class Maps extends Component {
 
   renderChildren() {
     const {children} = this.props;
-    
+    var self = this;
     if (!children) return;
+
     console.log("$$$ ", children);
     return React.Children.map(children, c => {
-      return React.cloneElement(c, {
-        map: this.map,
-        mapCenter: this.props.initialCenter
-      });
+      return (<Marker mapObj={this.state.mapObj} position={{lat : this.state.lat, lng : this.state.lng}} />);
     })
   }
 
