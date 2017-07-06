@@ -1,7 +1,8 @@
 body{
 	font-family: 'Roboto Condensed', sans-serif;
 	background-color: white;
-  background: url("https://s-media-cache-ak0.pinimg.com/originals/49/2e/dd/492edd38ce7000a98c7147525b1d2bf1.jpg");
+  background: url("https://www.xmple.com/wallpaper/blue-linear-gradient-white-2732x2048-c2-f5f5dc-87cefa-a-60-f-14.svg");
+  background-size: cover;
 }
 
 h1,h2,h3,h4{
@@ -77,10 +78,25 @@ h1,h2,h3,h4{
   padding-left: 50px;
 }
 
+#get-new {
+  text-align: center;
+}
+
 .myTagCloud {
   text-decoration: none;
   padding-top: 160px;
   width: 70%;
+}
+
+#reload {
+  background: white;
+  border: none;
+  margin-top: 15px;
+}
+
+#reload-pic {
+  height: 25px;
+  width: 25px;
 }
 
 /*
@@ -148,6 +164,12 @@ input[type=radio]:checked + label>img {
   border: 1px solid white;
   box-shadow: 0 0 4px 4px #517ba0;
 }
+
+button:focus {
+    border: none;
+    outline: none;
+}
+
 
 #singleimg {
   width: auto;
