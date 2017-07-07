@@ -149,7 +149,7 @@ class App extends Component{
 
   //Set current map markers
   setMarkers(response){
-    if(response.data.results !== undefined)
+    if(response.data.results)
     {
       var self = this;
 
