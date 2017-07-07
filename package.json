@@ -12,13 +12,9 @@
   "dependencies": {
     "bootstrap-slider": "^9.8.0",
     "concurrently": "^3.4.0",
-    "google-map-react": "^0.24.0",
     "rangeslider.js": "^2.3.0",
-    "react-codemirror": "^1.0.0",
-    "react-tagcloud": "^1.2.0",
-    "react-youtube": "^7.4.0",
-    "request": "^2.81.0",
-    "rimraf": "^2.5.4"
+    "rimraf": "^2.5.4",
+    "session": "^0.1.0"
   },
   "scripts": {
     "build": "concurrently \"cd client && npm run build\" \"cd server && npm run build\"",

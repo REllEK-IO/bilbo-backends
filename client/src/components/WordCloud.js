@@ -17,15 +17,37 @@ class WordCloud extends Component{
     }
   };
 
+  shouldComponentUpdate(nextProps) {
+    return false;
+  }
+
   render(){
+    const customRenderer = (tag, size, color) => (
+      <span key={tag.value}
+            className={"load-in"}
+            style={{
+              animationDelay: `${Math.random() * 2}s`,
+              fontSize: `${size}px`,
+              border: `2px solid ${color}`,
+              margin: '3px',
+              padding: '3px',
+              display: 'inline-block',
+              color: color,
+            }}>{tag.value}</span>
+    );
+
     return(
       <div className={"col-lg-12 word-box"}>
-      <TagCloud minSize={15}
+      <TagCloud onClick={this.props.handleClick}
+                minSize={15}
                 maxSize={35}
                 colorOptions={options}
                 tags={this.state.wordCloudValue}
                 style={{width: 550, textAlign: 'center'}}
+                shuffle={"true"}
+                renderer={customRenderer}
                 className="myTagCloud center-block text-center" />
+                
                 <Reload />
       </div>
     );

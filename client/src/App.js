@@ -282,6 +282,12 @@ class App extends Component{
     this.setPos({lat : newCenter.lat(), lng : newCenter.lng()});
   }
 
+  authUser(){
+    axios.get("/auth/google")
+      .then((response)=>(console.log(response)))
+      .catch((error)=>(console.log(error)));
+  }
+
   renderMarkerBlocks(){
     if(this.state.markers){
 
@@ -315,9 +321,13 @@ class App extends Component{
                                           link : "https://github.com/mtKeller/bilbo-backends"
                                         }]} />
             <br />
-
+            <div className={"row"}>
+              <div className={"offset-lg-10 col-lg-2"}> 
+                <button onClick={this.authUser} style={{"margin-right":"20px"}} className="btn btn-outline-danger float-lg-right"><span className={"fa fa-google-plus"}>Google</span></button>
+              </div>
+            </div>
             <div className="offset-1 col-lg-10">
-              <WordCloud className="text-center" init={this.state.initWordCloud}/>
+              <WordCloud handleClick={function(e){this.setState({"query":e.value}); console.log("query", this.state.query)}.bind(this)} className="text-center" init={this.state.initWordCloud}/>
             </div>
 
             <div id="map-container">
