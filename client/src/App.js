@@ -327,7 +327,7 @@ class App extends Component{
               </div>
             </div>
             <div className="offset-1 col-lg-10">
-              <WordCloud className="text-center" init={this.state.initWordCloud}/>
+              <WordCloud handleClick={function(e){this.setState({"query":e.value}); console.log("query", this.state.query)}.bind(this)} className="text-center" init={this.state.initWordCloud}/>
             </div>
 
             <div id="map-container">
