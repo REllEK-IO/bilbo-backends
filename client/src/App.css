@@ -389,3 +389,11 @@ button:focus {
   overflow-y: scroll;
   max-height: 500px;
 }
+
+.is-disabled{
+  color: rgb(91, 197, 232) !important;
+}
+
+.is-active{
+  color: rgb(240, 173, 78) !important;
+}

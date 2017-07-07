@@ -9,7 +9,7 @@ class Container extends Component {
   render() {
     return (
       <div className={"map-box"}>
-        <Maps handlePosChange={this.props.handlePosChange} markers={this.props.markers} initialCenter={this.props.initialCenter} google={window.google} />
+        <Maps updateMapInfo={this.props.updateMapInfo} handlePosChange={this.props.handlePosChange} markers={this.props.markers} initialCenter={this.props.initialCenter} google={window.google} />
       </div>
     );
   }
