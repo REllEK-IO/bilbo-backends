@@ -288,9 +288,9 @@ class App extends Component{
       var blocks = this.state.markers.map((place)=>{
         // console.log("place id", place.place_id);
         var block = (
-              <MarkerBlock placeId={place.place_id} title={place.name} />
+              <MarkerBlock place={place} />
         );
-
+        console.log("phone",place.formatted_phone_number);
         return block;
       });
       return blocks;

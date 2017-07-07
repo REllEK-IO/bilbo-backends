@@ -198,7 +198,7 @@ class Maps extends Component {
         // index++;
         // return marked;
         console.log("Marker List" + mark.geometry.location);
-        return <Marker storeMarkers={this.storeMarkers.bind(this)} mapObj={this.state.mapObj} position={mark.geometry.location}/>;
+        return <Marker rating={mark.rating} storeMarkers={this.storeMarkers.bind(this)} title={mark.name} mapObj={this.state.mapObj} position={mark.geometry.location}/>;
 			});
       console.log("Marker List", markerList);
 		  return markerList;
