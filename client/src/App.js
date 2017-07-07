@@ -90,6 +90,7 @@ class App extends Component{
   componentDidMount(){
     if(!this.state.appInit){
       this.setTime();
+      this.setLocation();
 
       window.setInterval(function () {
         this.setTime();
@@ -100,24 +101,12 @@ class App extends Component{
       }.bind(this), 500)
 
       window.setTimeout(function(){
-          const PLACES_QUERY = {
-            query : this.state.defaultQuery,
-            lat : this.state.currentLocation.lat,
-            lng : this.state.currentLocation.lng,
-            radius : this.state.range,
-            minPrice : 0,
-            maxPrice : this.state.maxPrice
-          }
           // console.log("init", PLACES_QUERY.query);
-          places.getPlaces(PLACES_QUERY).then((response)=> {
-              // console.log("check this fucker", response);
-              this.setMarkers(response);
-          });
-      }.bind(this), 600)
+          this.updateSearch();
+      }.bind(this), 3000)
       
-
       // console.log("Old state: ", this.state.currentLocation);
-      this.setLocation();
+
       this.setState({
         appInit : true
       })
@@ -134,7 +123,7 @@ class App extends Component{
     }
     timeout = setTimeout(() => {
       places.getPlaces({
-        query : this.state.query,
+        query : this.state.query || this.state.defaultQuery,
         lat : this.state.currentLocation.lat,
         lng : this.state.currentLocation.lng,
         radius : distance_extend || this.state.range,
@@ -146,7 +135,7 @@ class App extends Component{
       }).catch((error)=>{
         console.log("Error updating new place search", error)
       })
-    }, 300);
+    }, 1000);
   }
 
   //Set current map markers
@@ -349,7 +338,7 @@ class App extends Component{
 
             <div className={"row"}>
               <div className={"col-lg-12"}>
-                <Container updateMapInfo={this.handleMapInfo.bind(this)} handlePosChange={this.handlePosChange.bind(this)} markers={this.state.markers} updatePosition={this.setPos.bind(this)} initialCenter={this.state.currentLocation} />
+                <Container handlePosChange={this.handlePosChange.bind(this)} markers={this.state.markers} updatePosition={this.setPos.bind(this)} initialCenter={this.state.currentLocation} />
               </div>
               
             </div>
@@ -364,3 +353,7 @@ class App extends Component{
   };
 }
 export default App;
+
+
+// todo:
+// updateMapInfo={this.handleMapInfo.bind(this)}
