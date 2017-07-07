@@ -5,12 +5,34 @@ class MarkerBlock extends Component{
 	constructor(props){
 		super(props);
 		// this.getDetails();
+		// placeId={place.place_id} image={place.icon} title={place.name} 
+		// rating={place.rating} address={place.formatted_address} 
+		// phone={place.formatted_phone_number}
+		if(this.props.place){
+				this.state = {
+				title : this.props.place.name || "No title",
+				img : this.props.place.icon,
+				id : this.props.place.place_id,
+				rating : this.props.place.rating,
+				address : this.props.place.formatted_address || "No Address Found",
+				phone : this.props.place.formatted_phone_number || "(XXX) XXX-XXXX",
+				link : this.props.place.url || "#"
+			} 
+		}
+	}
 
-		this.state = {
-			title : this.props.title || "No title",
-			img : "#",
-			id : this.props.placeId
-		} 
+	componentDidUpdate(prevProps, prevStat){
+		if(prevProps.place !== this.props.place){
+			this.setState({
+				title : this.props.place.name || "No title",
+				img : this.props.place.icon,
+				id : this.props.place.place_id,
+				rating : this.props.place.rating,
+				address : this.props.place.formatted_address || "No Address Found",
+				phone : this.props.place.formatted_phone_number || "(XXX) XXX-XXXX",
+				link : this.props.place.website || "#"
+			});
+		}
 	}
 
 	// componentDidMount(){
@@ -30,28 +52,31 @@ class MarkerBlock extends Component{
 	// 	}
 	// }
 
-	getDetails(){
-		var self = this;
-		places.getDetails(self.props.id)
-			.then((response) =>{
-				self.setState({
-					details : response
-				})
-			})
-	}
-
 	render(){
-		return(
-			<div className={"row marker-block"}>
-				<div className={"col-lg-2"}>
-					<img alt={this.state.title} src={this.state.img} className={"img-thumbnail"} />
+		if(this.props.place){
+			return(
+				<div className={"row marker-block"}>
+					<div className={"col-lg-2"}>
+						<img alt={this.state.title} src={this.state.img} className={"img-thumbnail"} />
+					</div>
+					<div className={"col-lg-2"}>
+						<a href={this.state.link} target={"_blank"}><h3 className={"text-center"}>{this.state.title}</h3></a>
+						<h3 className="float-lg-right">{this.state.rating}</h3>
+					</div>
+					<div className={"col-lg-8"}>
+						<h3 className={"float-lg-right"}>{this.state.address}</h3>
+						<br />
+						<br />
+						<h3 className="float-lg-right">{this.state.phone}</h3>
+					</div>
 				</div>
-				<div className={"col-lg-10"}>
-					<h3>{this.state.title}</h3>
-				</div>
-			</div>
-		)
+			)
+		}
+		else{
+			return null;
+		}
 	}
+		
 }
 
 export default MarkerBlock;

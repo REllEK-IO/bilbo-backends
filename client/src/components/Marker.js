@@ -5,8 +5,9 @@ class Marker extends Component {
 		super(props);
 
 		var infoWindowContent = (
-			'<div id="content">' +
-				'<h3>Something</h3>' +
+			'<div id="content" class="info-window">' +
+				'<h3 class="text-center">' + this.props.title + '</h3>' +
+				'<h4 class="text-center">' + this.props.rating + '</h3>' +
 				'<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus quo assumenda molestias, ut quis maxime soluta quia ad eligendi nihil numquam saepe, praesentium, eum placeat harum asperiores magni vitae. Molestiae numquam laudantium illum asperiores expedita deserunt.</p>' +
 			'</div>'
 		);
@@ -15,7 +16,7 @@ class Marker extends Component {
 			mapObj : this.props.mapObj || undefined,
 			markerObj : undefined,
 			position : this.props.position || undefined,
-			title : "Something",
+			title : this.props.title,
 			infoWindowContent : infoWindowContent
 		}
 	}
