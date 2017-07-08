@@ -260,6 +260,7 @@ button:focus {
 
 .load-in:hover{
   transform: scale(1.1);
+  cursor: pointer;
 }
 
 @keyframes animationFrames{
@@ -396,4 +397,15 @@ button:focus {
 
 .is-active{
   color: rgb(240, 173, 78) !important;
+}
+
+.tab-box{
+  color: white;
+  padding-top: 10px;
+  background-color: rgb(50, 94, 144);
+}
+
+.tab-box.active{
+  color: black;
+  background-color: rgb(247, 247, 247);
 }

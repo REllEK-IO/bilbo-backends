@@ -15,6 +15,7 @@ import Price from './components/children/Price'
 import Footer from './components/children/Footer'
 import MarkerView from './components/MarkerView'
 import MarkerBlock from './components/children/MarkerBlock';
+import Tabs from './components/children/Tabs';
 
 //helpers
 import places from "./helpers/googlePlaces";
@@ -77,7 +78,7 @@ class App extends Component{
       console.log("query field updated", this.state.query);
       this.updateSearch()
     }
-    else if(prevState.priceLevel !== this.state.priceLevel){
+    else if(prevState.maxPrice !== this.state.maxPrice){
       console.log("price level updated", this.state.priceLevel);
       this.updateSearch()
     }
@@ -342,6 +343,7 @@ class App extends Component{
               </div>
               
             </div>
+            <Tabs />
             <MarkerView>
               {this.renderMarkerBlocks()}
             </MarkerView>
