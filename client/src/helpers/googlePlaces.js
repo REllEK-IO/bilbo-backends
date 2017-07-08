@@ -5,21 +5,11 @@ const QUERYURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
 
 var places = (function () {
 	var getPlaces = function (PLACES_QUERY) {
-		var searchQuery = PLACES_QUERY.query || "food";
-		var latitude = PLACES_QUERY.lat || 32.792095;
-		var longitude = PLACES_QUERY.lng || -117.232337;
-		var searchRadius = PLACES_QUERY.radius || 10000;
-		var searchMinPrice = PLACES_QUERY.minPrice || 0;
-		var searchMaxPrice = PLACES_QUERY.maxPrice || 4;
-
-		const STRUCTURED_QUERY = QUERYURL + "&location=" + latitude + "," + longitude + "&keyword=" + encodeURI(searchQuery) + "&radius=" + searchRadius +
-			"&opennow=true&minprice=" + searchMinPrice + "&maxprice=" + searchMaxPrice + APIKEY;
-
 		// console.log("Get places", STRUCTURED_QUERY);
-
-		var getCall = axios.get(STRUCTURED_QUERY)
+		if(PLACES_QUERY){
+			var getCall = axios.get("/api/place/", {params: {place:PLACES_QUERY}})
 			.then(function (response) {
-				console.log(STRUCTURED_QUERY)
+				console.log("test", response);
 				return response;
 			})
 			.catch(function (error) {
@@ -27,6 +17,10 @@ var places = (function () {
 			});
 		
 		return getCall;
+		}
+		else{
+			return null;
+		}
 	}
 	var getPhoto = function(PHOTO_REFERENCE){
 		if(PHOTO_REFERENCE !== undefined || PHOTO_REFERENCE !== null || PHOTO_REFERENCE !== "undefined"){
@@ -54,9 +48,7 @@ var places = (function () {
 
 	var getDetails = function(PLACE_ID){
 		if(PLACE_ID !== undefined){
-			const QUERY_URL = "https://maps.googleapis.com/maps/api/place/details/json?placeid=" + PLACE_ID + APIKEY;
-			console.log("details url", PLACE_ID, QUERY_URL)
-			var getCall = axios.get(QUERY_URL)
+			var getCall = axios.get("/api/placeid/",{params:{id:PLACE_ID}})
 				.then(function (response) {
 					console.log("Stack Request for details " + response)
 					return response;
