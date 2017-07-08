@@ -132,7 +132,7 @@ var processQuery = {
 	},
 
 	getFinalArray: function(cb){
-		cb(this.finalArray);
+		cb(finalArray);
 	}
  }
 

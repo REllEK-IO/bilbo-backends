@@ -34,7 +34,12 @@ class App extends Component{
     //1 - 4 sets current return to this exact range
     //0 sets to all
     var randomSizeList = function(){
-      var foodList = ["tacos","thai","seafood","gastro pub","california roll","mexican","cheese steak","eggs benedict","bakery","martini","pho","bbq chicken pizza","sushirrito","dim sum","fruit salad","vegan sandwich","hot wings","waffles","green smoothie","gelato"];
+      var foodList = ["tacos","thai","seafood","gastro pub","california roll","mexican","cheese steak","eggs benedict","bakery","martini",
+                      "pho","bbq chicken pizza","sushirrito","dim sum","fruit salad","vegan sandwich","hot wings","waffles","green smoothie",
+                      "gelato", "cheeseburger", "tapas", "ramen", "carnitas", "sashimi", "cupcakes", "chicken", "hot dogs", "pork belly", "lentils", 
+                      "california burrito", "carne asada fries", "candy", "frozen yogurt", "pulled pork", "steak", "pizza", "lasagna", "teriyaki", "pastrami"
+                      "kebab", "shawrma", "indian", "moroccan", "greek", "brazilian", "salmon", "crab", "lobster", "oysters", "tortas", "subs", "sandwiches",
+                       "cappuccino", "chile", "cheese", "french toast", "naan", "chicken tikka masala", "fried chicken", "jerk chicken", "salad" ];
       var objFoodList = [];
       var max = 35;
       var min = 12;
@@ -319,7 +324,7 @@ class App extends Component{
                 <button onClick={this.authUser} style={{"margin-right":"20px"}} className="btn btn-outline-danger float-lg-right"><span className={"fa fa-google-plus"}>Google</span></button>
               </div>
             </div>
-            <div className="offset-1 col-lg-10">
+            <div className="offset-lg-1 col-lg-10 col-sm-1">
               <WordCloud handleClick={function(e){this.setState({"query":e.value}); console.log("query", this.state.query)}.bind(this)} className="text-center" init={this.state.initWordCloud}/>
             </div>
 

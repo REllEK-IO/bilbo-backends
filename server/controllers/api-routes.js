@@ -88,6 +88,7 @@ module.exports = function (app) {
 	});
 
 	app.get("/api/yummly", function (req,res){
+
 		yummly.getFinalArray(res.json);
 	})
 
