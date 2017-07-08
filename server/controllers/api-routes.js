@@ -3,7 +3,7 @@ var yummly = require("../controllers/yummlyQuery");
 var rp = require("request-promise");
 // var passport = require('passport');
 
-const APIKEY = "&key=AIzaSyDUiRafm26qzxViMcWGRUT76L9sJVQCQwk";
+const APIKEY = "&key=AIzaSyDddN_DZnQvrQU9bDBK3YFDTEVaWzSG2V0";
 const QUERYURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
 
 const addArrayWords = function (arr, i) {

@@ -1,6 +1,5 @@
 import React ,{ Component} from 'react';
 import Maps from './Maps';
-import Marker from "./Marker";
 import {GoogleApiWrapper} from 'google-maps-react';
 
 class Container extends Component {

@@ -289,7 +289,7 @@ class App extends Component{
         var block = (
               <MarkerBlock place={place} />
         );
-        console.log("phone",place.formatted_phone_number);
+        // console.log("phone",place.formatted_phone_number);
         return block;
       });
       return blocks;
@@ -341,7 +341,7 @@ class App extends Component{
               </div>
               
             </div>
-            <Tabs />
+            <Tabs query={this.state.query || this.state.defaultQuery} />
             <MarkerView>
               {this.renderMarkerBlocks()}
             </MarkerView>
