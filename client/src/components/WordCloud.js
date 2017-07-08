@@ -39,8 +39,8 @@ class WordCloud extends Component{
     return(
       <div className={"col-lg-12 word-box"}>
       <TagCloud onClick={this.props.handleClick}
-                minSize={15}
-                maxSize={35}
+                minSize={10}
+                maxSize={30}
                 colorOptions={options}
                 tags={this.state.wordCloudValue}
                 style={{width: 550, textAlign: 'center'}}
