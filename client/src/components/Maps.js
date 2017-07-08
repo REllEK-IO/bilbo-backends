@@ -76,12 +76,19 @@ class Maps extends Component {
   }
 	
 	componentWillUpdate(prevProps, prevState) {
+
     if(prevProps.markers !== this.props.markers){
-      this.deleteMarkers();
+      for(var i = 0; i < this.state.markerObjs.length; i++){
+        this.state.markerObjs[i].setMap(null);
+      }
+      this.setState({
+          markers : this.props.markers,
+          markerObjs : []
+      })
     }
   }
 
-  
+
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.google !== this.props.google) {
       this.loadMap();
@@ -192,7 +199,7 @@ class Maps extends Component {
 
 		if(this.state.markers && this.state.mapObj){
       var index = 0;
-			markerList = this.state.markers.map((mark)=>{
+			markerList = this.props.markers.map((mark)=>{
         var description = "";
 
         if(mark.reviews[0]){
