@@ -83,13 +83,7 @@ class Maps extends Component {
       this.recenterMap();
     }
     if(prevProps.markers !== this.props.markers){
-      
       this.deleteMarkers();
-      
-      this.setState({
-        markers : this.props.markers,
-        markerObjs : []
-      })
     }
   }
 
@@ -145,6 +139,10 @@ class Maps extends Component {
     for(var i = 0; i < this.state.markerObjs.length; i++){
       this.state.markerObjs[i].setMap(null);
     }
+    this.setState({
+        markers : this.props.markers,
+        markerObjs : []
+    })
   }
   
   recenterMap() {
@@ -191,16 +189,21 @@ class Maps extends Component {
 		if(this.state.markers && this.state.mapObj){
       var index = 0;
 			markerList = this.state.markers.map((mark)=>{
-				// console.log("Child position", mark.geometry.location);
-				// var marked = (
-				// 	<Marker key={"marker" + index} position={mark.geometry.location} />
-				// );
-        // index++;
-        // return marked;
-        console.log("Marker List" + mark.geometry.location);
-        return <Marker rating={mark.rating} storeMarkers={this.storeMarkers.bind(this)} title={mark.name} mapObj={this.state.mapObj} position={mark.geometry.location}/>;
+        var description = "";
+
+        if(mark.reviews[0]){
+          description = mark.reviews[0].text;
+        }
+
+        return (
+          <Marker rating={mark.rating} 
+                  description={description} 
+                  storeMarkers={this.storeMarkers.bind(this)} 
+                  title={mark.name} mapObj={this.state.mapObj} 
+                  position={mark.geometry.location}/>
+          );
 			});
-      console.log("Marker List", markerList);
+      // console.log("Marker List", markerList);
 		  return markerList;
 		}
 	}

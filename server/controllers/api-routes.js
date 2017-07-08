@@ -1,6 +1,6 @@
 var Word = require("../models/word");
 var yummly = require("../controllers/yummlyQuery");
-var passport = require('passport');
+// var passport = require('passport');
 
 const addArrayWords = function (arr, i) {
 	word = arr[i].toString().toLowerCase();
@@ -87,11 +87,11 @@ module.exports = function (app) {
 		yummly.getFinalArray(res.json);
 	})
 
-	app.get("/auth/google", passport.authenticate('google', {scope: ['profile','email']}));
+	// app.get("/auth/google", passport.authenticate('google', {scope: ['profile','email']}));
 
-	app.get("/auth/google/callback",
-		passport.authenticate('google', {
-			successRedirect : '/',
-			failureRedirect: '/'
-		}));
+	// app.get("/auth/google/callback",
+	// 	passport.authenticate('google', {
+	// 		successRedirect : '/',
+	// 		failureRedirect: '/'
+	// 	}));
 }

@@ -7,8 +7,8 @@ class Marker extends Component {
 		var infoWindowContent = (
 			'<div id="content" class="info-window">' +
 				'<h3 class="text-center">' + this.props.title + '</h3>' +
-				'<h4 class="text-center">' + this.props.rating + '</h3>' +
-				'<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus quo assumenda molestias, ut quis maxime soluta quia ad eligendi nihil numquam saepe, praesentium, eum placeat harum asperiores magni vitae. Molestiae numquam laudantium illum asperiores expedita deserunt.</p>' +
+				this.generateStars() +
+				'<p style="text-align: center; font-size: 18px;">' + this.props.description + '</p>' +
 			'</div>'
 		);
 
@@ -17,7 +17,8 @@ class Marker extends Component {
 			markerObj : undefined,
 			position : this.props.position || undefined,
 			title : this.props.title,
-			infoWindowContent : infoWindowContent
+			infoWindowContent : infoWindowContent,
+			description: this.props.description
 		}
 	}
 
@@ -43,6 +44,27 @@ class Marker extends Component {
 	}
 	componentWillUnmount(){
 		this.state.markerObj.setMap(null);
+	}
+
+	generateStars(){
+		if(this.props.rating){
+			var stars = Math.floor(this.props.rating);
+			var starRating = "<div style='text-align: center; font-size: 24px;'>";
+			for(var i = 0; i < stars; i++){
+				starRating += (
+					'<i class="fa fa-star text-warning" aria-hidden="true"></i>'
+				);
+			}
+			for(var i = 0; i < 5 - stars; i++){
+				starRating += (
+					'<i class="fa fa-star-o text-info" aria-hidden="true"></i>'
+				);
+			}
+			return starRating + '</div>';
+		}
+		else{
+			return '<h4 class="text-center">' + this.props.rating + '</h3>';
+		}
 	}
 
 	renderMarker() {
@@ -73,8 +95,11 @@ class Marker extends Component {
       	content: this.state.infoWindowContent
       });
 
+			var self = this;
+
 			marker.addListener('click', function() {
       	infoWindow.open(map, marker);
+				window.location.hash = self.props.title;
       });
 
 			this.props.storeMarkers(this.state.markerObj);

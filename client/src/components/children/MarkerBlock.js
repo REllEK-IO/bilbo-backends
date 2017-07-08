@@ -1,5 +1,6 @@
 import React, {	Component} from 'react';
 import places from '../../helpers/googlePlaces';
+import Rater from 'react-rater'
 
 class MarkerBlock extends Component{
 	constructor(props){
@@ -55,13 +56,13 @@ class MarkerBlock extends Component{
 	render(){
 		if(this.props.place){
 			return(
-				<div className={"row marker-block"}>
+				<div id={this.state.title} className={"row marker-block"}>
 					<div className={"col-lg-2"}>
 						<img alt={this.state.title} src={this.state.img} className={"img-thumbnail"} />
 					</div>
 					<div className={"col-lg-2"}>
 						<a href={this.state.link} target={"_blank"}><h3 className={"text-center"}>{this.state.title}</h3></a>
-						<h3 className="float-lg-right">{this.state.rating}</h3>
+						<h3 className="float-lg-right"><Rater total={5} rating={this.state.rating} interactive={false} /></h3>
 					</div>
 					<div className={"col-lg-8"}>
 						<h3 className={"float-lg-right"}>{this.state.address}</h3>

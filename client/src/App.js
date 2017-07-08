@@ -15,6 +15,7 @@ import Price from './components/children/Price'
 import Footer from './components/children/Footer'
 import MarkerView from './components/MarkerView'
 import MarkerBlock from './components/children/MarkerBlock';
+import Tabs from './components/children/Tabs';
 
 //helpers
 import places from "./helpers/googlePlaces";
@@ -61,7 +62,9 @@ class App extends Component{
       searchHistory : [],
       appInit : false,
       initWordCloud: food,
-      query : undefined
+      query : undefined,
+      map : undefined,
+      markerObjs : undefined
     }
     
   }
@@ -75,7 +78,7 @@ class App extends Component{
       console.log("query field updated", this.state.query);
       this.updateSearch()
     }
-    else if(prevState.priceLevel !== this.state.priceLevel){
+    else if(prevState.maxPrice !== this.state.maxPrice){
       console.log("price level updated", this.state.priceLevel);
       this.updateSearch()
     }
@@ -88,6 +91,7 @@ class App extends Component{
   componentDidMount(){
     if(!this.state.appInit){
       this.setTime();
+      this.setLocation();
 
       window.setInterval(function () {
         this.setTime();
@@ -98,31 +102,19 @@ class App extends Component{
       }.bind(this), 500)
 
       window.setTimeout(function(){
-          const PLACES_QUERY = {
-            query : this.state.defaultQuery,
-            lat : this.state.currentLocation.lat,
-            lng : this.state.currentLocation.lng,
-            radius : this.state.range,
-            minPrice : 0,
-            maxPrice : this.state.maxPrice
-          }
           // console.log("init", PLACES_QUERY.query);
-          places.getPlaces(PLACES_QUERY).then((response)=> {
-              // console.log("check this fucker", response);
-              this.setMarkers(response);
-          });
-      }.bind(this), 600)
+          this.updateSearch();
+      }.bind(this), 3000)
       
-
       // console.log("Old state: ", this.state.currentLocation);
-      this.setLocation();
+
       this.setState({
         appInit : true
       })
     }
   }
 
-  updateSearch(){
+  updateSearch(distance_extend){
     var self = this;
     console.log("Updating search");
     var timeout;
@@ -132,10 +124,10 @@ class App extends Component{
     }
     timeout = setTimeout(() => {
       places.getPlaces({
-        query : this.state.query,
+        query : this.state.query || this.state.defaultQuery,
         lat : this.state.currentLocation.lat,
         lng : this.state.currentLocation.lng,
-        radius : this.state.range,
+        radius : distance_extend || this.state.range,
         minPrice : 0,
         maxPrice : this.state.maxPrice
       }).then((response)=>{
@@ -144,44 +136,47 @@ class App extends Component{
       }).catch((error)=>{
         console.log("Error updating new place search", error)
       })
-    }, 300);
+    }, 1000);
   }
 
   //Set current map markers
   setMarkers(response){
     if(response.data.results !== undefined)
     {
-      var self = this;
+      if(response.data.results.length < 1 && this.state.range < 2000){
+        this.updateSearch("2000");
+      }
+      else if(response.data.results.length < 1 && this.state.range < 10000){
+        this.updateSearch("10000");
+      }
+      else{
+        var self = this;
+        var arrRequest = Object.keys(response.data.results).map((key => {
+          return places.getDetails(response.data.results[key].place_id)
+        }));
 
-      // self.setState({
-      //   markers: response.data.results
-      // })
+        axios.all(arrRequest)
+          .then((allResponse)=>{
+            var parsedResponse = Object.keys(allResponse).map((key)=>{
+              if(allResponse[key].data.result){
+                return allResponse[key].data.result;
+              }
+              else{
+                return null
+              }
 
-      var arrRequest = Object.keys(response.data.results).map((key => {
-        return places.getDetails(response.data.results[key].place_id)
-      }));
+              
+            });
 
-      axios.all(arrRequest)
-        .then((allResponse)=>{
-          var parsedResponse = Object.keys(allResponse).map((key)=>{
-            if(allResponse[key].data.result){
-              return allResponse[key].data.result;
-            }
-            else{
-              return null
-            }
+            console.log("find all", parsedResponse)
 
-            
-          });
-
-          console.log("find all", parsedResponse)
-
-          self.setState({
-            markers : parsedResponse
-          });
-        })
-        .catch(error => (console.log(error)));
-    }
+            self.setState({
+              markers : parsedResponse
+            });
+          })
+          .catch(error => (console.log(error)));
+      }
+      }
     
     // console.log("$$$ Set Markers: " + this.state.markers);
   }
@@ -348,6 +343,7 @@ class App extends Component{
               </div>
               
             </div>
+            <Tabs />
             <MarkerView>
               {this.renderMarkerBlocks()}
             </MarkerView>
@@ -359,3 +355,7 @@ class App extends Component{
   };
 }
 export default App;
+
+
+// todo:
+// updateMapInfo={this.handleMapInfo.bind(this)}
