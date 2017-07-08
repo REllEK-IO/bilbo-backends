@@ -55,7 +55,6 @@ var randomWords = {
 
 		getFinalArray: function (){
 			return this.finalArray;
-			console.log("thhis is the dsffinaladadsddas" + this.finalArray);
 		}
 };
 
@@ -104,64 +103,64 @@ module.exports = {
 
 
 
-var recipeType = matches[i].recipeName;
-		// .then(function (response, status){
-		 	var recipeLength= matches.length;
+// var recipeType = matches[i].recipeName;
+// 		// .then(function (response, status){
+// 		 	var recipeLength= matches.length;
 		 	
-		 	var recipeMatch1 = getOne.recipeType
-		 	var recipeLength1 = getOne.recipeLength;
+// 		 	var recipeMatch1 = getOne.recipeType
+// 		 	var recipeLength1 = getOne.recipeLength;
 			
-			var recipeMatch2 = getTwo.recipeType;
-			var recipeLength2 = getTwo.recipeLength;
+// 			var recipeMatch2 = getTwo.recipeType;
+// 			var recipeLength2 = getTwo.recipeLength;
 			
-			var recipeMatch3 = getThree.recipeType;
-			var recipeLength3 = getThree.recipeLength;
+// 			var recipeMatch3 = getThree.recipeType;
+// 			var recipeLength3 = getThree.recipeLength;
 			
-			var recipeMatch4 = getFour.recipeType;
-			var recipeLength4 = getFour.recipeLength;
+// 			var recipeMatch4 = getFour.recipeType;
+// 			var recipeLength4 = getFour.recipeLength;
 			
-			var recipeMatch5 = getFive.recipeType;
-			var recipeLength5 = getFive.recipeLength;
+// 			var recipeMatch5 = getFive.recipeType;
+// 			var recipeLength5 = getFive.recipeLength;
 				
-		// 	console.log("Recipe Array Length: " + recipeLength + "\n");
-			// for (var i = 0 ; i < 10; i++){
-			self.getDataLoop(recipeLength1, recipeMatch1);
-			self.getDataLoop(recipeLength2, recipeMatch2);
-			self.getDataLoop(recipeLength3, recurecipeMatch3);
-			self.getDataLoop(recipeLength4, recipeMatch4);
-			self.getDataLoop(recipeLength5, recipeMatch5);
+// 		// 	console.log("Recipe Array Length: " + recipeLength + "\n");
+// 			// for (var i = 0 ; i < 10; i++){
+// 			self.getDataLoop(recipeLength1, recipeMatch1);
+// 			self.getDataLoop(recipeLength2, recipeMatch2);
+// 			self.getDataLoop(recipeLength3, recurecipeMatch3);
+// 			self.getDataLoop(recipeLength4, recipeMatch4);
+// 			self.getDataLoop(recipeLength5, recipeMatch5);
 
 
-			getDataLoop: function(data){
-		for(var i < 0; i < 10; i++){
-			recipeArray.push(data);
-			// return this.recipeArray
+// 			getDataLoop: function(data){
+// 		for(var i < 0; i < 10; i++){
+// 			recipeArray.push(data);
+// 			// return this.recipeArray
 		 	
-		// }).then(function(response){
-		// 	finalRecipeArray = _.sample(recipeArray, 30);
-		// 	line
-		// 	console.log("Recipes: " + "\n");
-		// 	formatLog(finalRecipeArray);
+// 		// }).then(function(response){
+// 		// 	finalRecipeArray = _.sample(recipeArray, 30);
+// 		// 	line
+// 		// 	console.log("Recipes: " + "\n");
+// 		// 	formatLog(finalRecipeArray);
 
 
-			// }).then(function(array){
-		// 	var tempObj = {};
-		// 	var i= 0;
-		// 	var j =1;
-		// 	for(i =0; i < finalRecipeArray.length; i++){
-		// 		tempObj[finalRecipeArray[i]] = j;
+// 			// }).then(function(array){
+// 		// 	var tempObj = {};
+// 		// 	var i= 0;
+// 		// 	var j =1;
+// 		// 	for(i =0; i < finalRecipeArray.length; i++){
+// 		// 		tempObj[finalRecipeArray[i]] = j;
 				
-		// 		j++;
-		// 	};
-		// 	var final =[];
-		// 	for(var key in tempObj)
-		// 		final.push(key);
-		// 	console.log( "Recipes Without Duplicates: " + "\n");
-		// 	formatLog(final);
-		// 	finalArray = finalArray.concat(final);
-		// 	console.log( "Recipes and Words: " + "\n" );
-		// 	formatLog(finalArray);
-		// 	// return this.final;
-		// 	return this.finalArray;
-		// }));
-	}
+// 		// 		j++;
+// 		// 	};
+// 		// 	var final =[];
+// 		// 	for(var key in tempObj)
+// 		// 		final.push(key);
+// 		// 	console.log( "Recipes Without Duplicates: " + "\n");
+// 		// 	formatLog(final);
+// 		// 	finalArray = finalArray.concat(final);
+// 		// 	console.log( "Recipes and Words: " + "\n" );
+// 		// 	formatLog(finalArray);
+// 		// 	// return this.final;
+// 		// 	return this.finalArray;
+// 		// }));
+// 	}
