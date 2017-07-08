@@ -48,7 +48,7 @@ mongoose.Promise = Promise;
 
 console.log("run");
 
-mongoose.connect("mongodb://localhost/gopherthat", options);
+mongoose.connect("mongodb://hostman:hostmanbestman1@ds151662.mlab.com:51662/heroku_xqq82l40", options);
 
 var db = mongoose.connection;
 db.on("error", function (error) {
