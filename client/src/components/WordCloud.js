@@ -31,6 +31,7 @@ class WordCloud extends Component{
               border: `2px solid ${color}`,
               margin: '3px',
               padding: '3px',
+              backgroundColor: 'white',
               display: 'inline-block',
               color: color,
             }}>{tag.value}</span>
@@ -43,7 +44,7 @@ class WordCloud extends Component{
                 maxSize={30}
                 colorOptions={options}
                 tags={this.state.wordCloudValue}
-                style={{width: 550, textAlign: 'center'}}
+                style={{width: 1000, textAlign: 'center'}}
                 shuffle={"true"}
                 renderer={customRenderer}
                 className="myTagCloud center-block text-center" />
