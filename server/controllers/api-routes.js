@@ -84,9 +84,11 @@ module.exports = function (app) {
 	});
 
 	app.get("/api/yummly", function (req,res){
-		yummly.getFinalArray(res.json);
-	})
-
+			yummly.getFinalArray(function(data){
+			res.json(data);
+			console.log(data);
+		});
+	});
 	// app.get("/auth/google", passport.authenticate('google', {scope: ['profile','email']}));
 
 	// app.get("/auth/google/callback",
