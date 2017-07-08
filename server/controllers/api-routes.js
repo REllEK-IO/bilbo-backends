@@ -93,9 +93,10 @@ module.exports = function (app) {
 	})
 
 	app.get('/api/place', function(req, res){
-		const PLACES_QUERY = req.query.place;
+		var PLACES_QUERY = JSON.parse(req.query.place);
 		// console.log(PLACES_QUERY);
 		var searchQuery = PLACES_QUERY.query || "food";
+		console.log(searchQuery, PLACES_QUERY.query);
 		var latitude = PLACES_QUERY.lat || 32.792095;
 		var longitude = PLACES_QUERY.lng || -117.232337;
 		var searchRadius = PLACES_QUERY.radius || 10000;
@@ -107,7 +108,7 @@ module.exports = function (app) {
 
 		// console.log("Get places", STRUCTURED_QUERY);
 
-		var getCall = rp.get(STRUCTURED_QUERY)
+		rp.get(STRUCTURED_QUERY)
 			.then(function (response) {
 				// console.log(response);
 				res.json(JSON.parse(response));
@@ -118,11 +119,12 @@ module.exports = function (app) {
 	})
 
 	app.get('/api/placeid', function(req,res){
-		const PLACE_ID = req.query.id;
+		var PLACE_ID = req.query.id;
 
-		const QUERY_URL = "https://maps.googleapis.com/maps/api/place/details/json?placeid=" + PLACE_ID + APIKEY;
-		console.log("details url", PLACE_ID, QUERY_URL)
-		var getCall = rp.get(QUERY_URL)
+		console.log(PLACE_ID);
+		var QUERY_URL = "https://maps.googleapis.com/maps/api/place/details/json?placeid=" + PLACE_ID + APIKEY;
+		// console.log("details url", PLACE_ID, QUERY_URL)
+		rp.get(QUERY_URL)
 			.then(function (response) {
 				// console.log("Stack Request for details " + response)
 				res.json(JSON.parse(response));

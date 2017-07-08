@@ -163,7 +163,9 @@ class App extends Component{
       }
       else{
         var self = this;
+        console.log("*** ---------- ***");
         var arrRequest = Object.keys(response.data.results).map((key => {
+          console.log("***", response.data.results[key].place_id);
           return places.getDetails(response.data.results[key].place_id)
         }));
 
@@ -176,11 +178,9 @@ class App extends Component{
               else{
                 return null
               }
-
-              
             });
 
-            // console.log("find all", parsedResponse)
+            console.log("setting markers", parsedResponse)
 
             self.setState({
               markers : parsedResponse
