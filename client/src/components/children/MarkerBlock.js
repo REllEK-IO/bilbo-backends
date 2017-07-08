@@ -1,5 +1,4 @@
 import React, {	Component} from 'react';
-import places from '../../helpers/googlePlaces';
 import Rater from 'react-rater'
 
 class MarkerBlock extends Component{

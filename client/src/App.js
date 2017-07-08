@@ -58,12 +58,10 @@ class App extends Component{
 
     this.state = {
       priceLevel : 4,
-      range : 1000,
-      lat : 32.792095,
-      lng : -117.232337,
+      range : 10000,
       defaultQuery : "food",
       markers: undefined,
-      currentLocation: {lat: 32.74752299999999, lng: -117.1601377},
+      currentLocation: {lat: 32.85159468705687, lng: -117.18459944621583},
       searchHistory : [],
       appInit : false,
       initWordCloud: food,
@@ -296,7 +294,7 @@ class App extends Component{
         var block = (
               <MarkerBlock place={place} />
         );
-        console.log("phone",place.formatted_phone_number);
+        // console.log("phone",place.formatted_phone_number);
         return block;
       });
       return blocks;
@@ -348,7 +346,7 @@ class App extends Component{
               </div>
               
             </div>
-            <Tabs />
+            <Tabs query={this.state.query || this.state.defaultQuery} />
             <MarkerView>
               {this.renderMarkerBlocks()}
             </MarkerView>

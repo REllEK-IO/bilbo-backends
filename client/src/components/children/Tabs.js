@@ -4,42 +4,46 @@ class Tabs extends Component{
  constructor(props){
 	super(props);
 
+	// this.state = {
+	// 	searchTabs : [this.props.query],
+	// 	activeTab : 0
+	// }
 	this.state = {
-		searchTabs : [this.props.query],
-		activeTab : 0
+		query : this.props.query
 	}
  }
  
- componentWillUpdate(prevProps, prevState){
-	 var searchedLength = this.state.searchTabs.length;
-   
-	 var contains = false;
-	 for(var i = 0; i < searchedLength; i++){
-		 if(this.props.query === this.state.searchTabs[i]){
-			 contains = true;
-		 }
-	 }
 
-	 if(!contains){
-		 if(searchedLength >= 5){
-				var newSearchedArray = [
-					this.state.searchTabs[1],
-					this.state.searchTabs[2],
-					this.state.searchTabs[3],
-					this.state.searchTabs[4],
-					this.props.query
-				]
+ componentWillUpdate(prevProps, prevState){
+	//  var searchedLength = this.state.searchTabs.length;
+   
+	//  var contains = false;
+	//  for(var i = 0; i < searchedLength; i++){
+	// 	 if(this.props.query === this.state.searchTabs[i]){
+	// 		 contains = true;
+	// 	 }
+	//  }
+
+	//  if(!contains){
+	// 	 if(searchedLength >= 5){
+	// 			var newSearchedArray = [
+	// 				this.state.searchTabs[1],
+	// 				this.state.searchTabs[2],
+	// 				this.state.searchTabs[3],
+	// 				this.state.searchTabs[4],
+	// 				this.props.query
+	// 			]
 				
-				this.setState({
-					searchTab : newSearchedArray
-				})
-		 }
-		 else{
-				this.setState({
-					search : this.state.searchTabs.push(this.props.query)
-				});
-		 }
-	 }
+	// 			this.setState({
+	// 				searchTab : newSearchedArray
+	// 			})
+	// 	 }
+	// 	 else{
+	// 			this.setState({
+	// 				search : this.state.searchTabs.push(this.props.query)
+	// 			});
+	// 	 }
+	//  }
  }
 
  renderTab(){
@@ -52,16 +56,7 @@ class Tabs extends Component{
 		 	<div className={"offset-lg-2"}>
 					<ul className="nav nav-tabs">
 						<li className="nav-item">
-							<a className="nav-link active" href="#">Active</a>
-						</li>
-						<li className="nav-item">
-							<a className="nav-link" href="#">Link</a>
-						</li>
-						<li className="nav-item">
-							<a className="nav-link" href="#">Link</a>
-						</li>
-						<li className="nav-item">
-							<a className="nav-link disabled" href="#">Disabled</a>
+							<a className="nav-link active" >{this.props.query}</a>
 						</li>
 					</ul>
 				</div>

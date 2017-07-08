@@ -97,7 +97,7 @@ class Maps extends Component {
       const mapRef = this.refs.map;
       const node = ReactDOM.findDOMNode(mapRef);
 
-      let zoom = 14;
+      let zoom = 13;
       let lat = this.state.lat;
       let lng = this.state.lng;
 
