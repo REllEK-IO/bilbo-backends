@@ -321,7 +321,7 @@ class App extends Component{
                 <button onClick={this.authUser} style={{"margin-right":"20px"}} className="btn btn-outline-danger float-lg-right"><span className={"fa fa-google-plus"}>Google</span></button>
               </div>
             </div>
-            <div className="offset-1 col-lg-10">
+            <div className="offset-lg-1 col-lg-10 col-sm-1">
               <WordCloud handleClick={function(e){this.setState({"query":e.value}); console.log("query", this.state.query)}.bind(this)} className="text-center" init={this.state.initWordCloud}/>
             </div>
 

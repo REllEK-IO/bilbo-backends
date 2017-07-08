@@ -1,20 +1,20 @@
 body{
   font-family: 'Open Sans', sans-serif;
 	background-color: white;
-  /*
+  
   background: url("http://www.teamrvexpress.com/wp-content/uploads/2015/03/OpenRoadBG.jpg");
   background-size: 140%;
-  */
+  
 
   /*
   background: url("https://ak9.picdn.net/shutterstock/videos/5120567/thumb/1.jpg");
   background-size: 100% 50%;
   */
 
-  
+  /*
   background: url("http://cdn-prod.heartfulness.org/hfnmag/images/the-evolution-of-consciousness-part-3.jpg");
-  background-size: 1% 300%;
-  
+  background-size: 1% 250%;
+  */
 
 }
 
@@ -408,4 +408,31 @@ button:focus {
 .tab-box.active{
   color: black;
   background-color: rgb(247, 247, 247);
+}
+
+@media screen and (max-width: 768px) {
+
+body{
+  font-family: 'Open Sans', sans-serif;
+  background-color: white;
+  
+  background: url("http://www.teamrvexpress.com/wp-content/uploads/2015/03/OpenRoadBG.jpg");
+  background-size: 350%;
+}
+
+
+  .word-box{
+  /*
+  background: url("http://i.imgur.com/rgdgtnD.png");
+  */
+  background: url("http://i.imgur.com/sHSFbCa.png");
+  background-color: ;
+  background-size: contain;
+  width: 50%;
+  height: 750px;
+  background-repeat: no-repeat;
+  margin-bottom: 0px;
+  background-position: cover;
+  background-size: 100% 145%;
+  }
 }
