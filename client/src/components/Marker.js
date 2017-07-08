@@ -39,7 +39,7 @@ class Marker extends Component {
 	componentDidMount(){
 		if(this.state.mapObj && this.state.position){
 			this.renderMarker();
-			console.log("Marker Mounted");
+			// console.log("Marker Mounted");
 		}
 	}
 	componentWillUnmount(){
@@ -74,7 +74,7 @@ class Marker extends Component {
 			var map = this.state.mapObj;
 
 			let pos = position;
-			console.log("%^%^%   ", pos);
+			// console.log("%^%^%   ", pos);
 			position = new window.google.maps.LatLng(pos.lat, pos.lng);
 
 			const pref = {
@@ -84,7 +84,7 @@ class Marker extends Component {
 				animation: window.google.maps.Animation.DROP
 			};
 
-			console.log("map obj", map);
+			// console.log("map obj", map);
 			var marker = new window.google.maps.Marker(pref);
 
 			this.setState({
@@ -104,7 +104,7 @@ class Marker extends Component {
 
 			this.props.storeMarkers(this.state.markerObj);
 
-			console.log(this.state.markerObj, "^^^^^^^^^^^^^6");
+			// console.log(this.state.markerObj, "^^^^^^^^^^^^^6");
 		}
 
 		// console.log("map info", map);

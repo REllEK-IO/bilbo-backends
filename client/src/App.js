@@ -58,7 +58,9 @@ class App extends Component{
 
     this.state = {
       priceLevel : 4,
-      range : 10000,
+      minPrice : 0,
+      maxPrice : 4,
+      range : 5000,
       defaultQuery : "food",
       markers: undefined,
       currentLocation: {lat: 32.85159468705687, lng: -117.18459944621583},
@@ -119,21 +121,26 @@ class App extends Component{
 
   updateSearch(distance_extend){
     var self = this;
-    console.log("Updating search");
+    
     var timeout;
+
+    var QUERY_BLOCK = {
+      query : this.state.query || this.state.defaultQuery,
+      lat : this.state.currentLocation.lat,
+      lng : this.state.currentLocation.lng,
+      radius : distance_extend || this.state.range,
+      minPrice : 0,
+      maxPrice : this.state.maxPrice
+    }
+
+    console.log("Updating search", QUERY_BLOCK);
+
     if (timeout) {
       clearTimeout(timeout);
       timeout = null;
     }
     timeout = setTimeout(() => {
-      places.getPlaces({
-        query : this.state.query || this.state.defaultQuery,
-        lat : this.state.currentLocation.lat,
-        lng : this.state.currentLocation.lng,
-        radius : distance_extend || this.state.range,
-        minPrice : 0,
-        maxPrice : this.state.maxPrice
-      }).then((response)=>{
+      places.getPlaces(QUERY_BLOCK).then((response)=>{
         self.setMarkers(response);
         console.log("Setting new markers");
       }).catch((error)=>{
@@ -148,9 +155,11 @@ class App extends Component{
     {
       if(response.data.results.length < 1 && this.state.range < 2000){
         this.updateSearch("2000");
+        console.log("Expanding search area to 2000");
       }
       else if(response.data.results.length < 1 && this.state.range < 10000){
         this.updateSearch("10000");
+        console.log("Expanding search area to 10000");
       }
       else{
         var self = this;
@@ -171,7 +180,7 @@ class App extends Component{
               
             });
 
-            console.log("find all", parsedResponse)
+            // console.log("find all", parsedResponse)
 
             self.setState({
               markers : parsedResponse
@@ -303,6 +312,18 @@ class App extends Component{
       return (<div></div>);
     }
   }
+  handleRangeChange(newRange){
+    this.setState({
+      range : newRange
+    });
+  }
+  
+  handlePriceChange(newPrice){
+    this.setState({
+      maxPrice : newPrice
+    });
+  }
+
 
   render(){
   return (
@@ -331,11 +352,11 @@ class App extends Component{
             <div id="map-container">
               <div className={"row text-center"} id="area-price">
                 <div className={"offset-lg-2 col-lg-4"} id="area">     
-                  <Area />
+                  <Area handleRangeChange={this.handleRangeChange.bind(this)}/>
                 </div>
 
                 <div className={"col-lg-4"} id="price">          
-                  <Price />
+                  <Price handlePriceChange={this.handlePriceChange.bind(this)} />
                 </div>
               </div>
             </div>

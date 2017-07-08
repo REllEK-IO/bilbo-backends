@@ -75,15 +75,19 @@ class Maps extends Component {
     this.loadMap();
   }
 	
-	componentDidUpdate(prevProps, prevState) {
+	componentWillUpdate(prevProps, prevState) {
+    if(prevProps.markers !== this.props.markers){
+      this.deleteMarkers();
+    }
+  }
+
+  
+  componentDidUpdate(prevProps, prevState) {
     if (prevProps.google !== this.props.google) {
       this.loadMap();
     }
     if (prevState.currentLocation !== this.state.currentLocation) {
       this.recenterMap();
-    }
-    if(prevProps.markers !== this.props.markers){
-      this.deleteMarkers();
     }
   }
 
@@ -125,7 +129,7 @@ class Maps extends Component {
         mapObj: mapObj
       })
 
-      console.log("map call", this.state.map);
+      // console.log("map call", this.state.map);
     }
 	}
 
@@ -147,8 +151,8 @@ class Maps extends Component {
   
   recenterMap() {
     // const map = this.map;
-    const lat = this.state.lat;
-    const lng = this.state.lng;
+    const lat = this.props.initialCenter.lat;
+    const lng = this.state.initialCenter.lng;
 
     // const google = this.props.google;
     // const maps = google.maps;
@@ -162,7 +166,7 @@ class Maps extends Component {
   handleEvent(evtName) {
     let timeout;
     const handlerName = evtName;
-    console.log("Setting Event: " + evtName);
+    // console.log("Setting Event: " + evtName);
     return (e) => {
       if (timeout) {
         clearTimeout(timeout);

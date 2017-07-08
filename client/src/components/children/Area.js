@@ -16,6 +16,12 @@ class Area extends React.Component {
     console.log("Range State: Within", newState.range, "meters");
   }
 
+  componentDidUpdate(prevProps, prevState){
+    if(prevState.range !== this.state.range){
+      this.props.handleRangeChange(this.state.range);
+    }
+  }
+
     render() {
         return (
           <form id="area">
