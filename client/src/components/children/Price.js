@@ -16,6 +16,13 @@ class Price extends React.Component {
     this.setState(newState);
     console.log("Max Price Level:", newState.priceLevel);
   }
+
+  componentDidUpdate(prevProps, prevState){
+    if(prevState.priceLevel !== this.state.priceLevel){
+      this.props.handlePriceChange(this.state.priceLevel);
+    }
+  }
+
     render() {
         return (
           <form id="price">
