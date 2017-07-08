@@ -37,7 +37,7 @@ class App extends Component{
       var foodList = ["tacos","thai","seafood","gastro pub","california roll","mexican","cheese steak","eggs benedict","bakery","martini",
                       "pho","bbq chicken pizza","sushirrito","dim sum","fruit salad","vegan sandwich","hot wings","waffles","green smoothie",
                       "gelato", "cheeseburger", "tapas", "ramen", "carnitas", "sashimi", "cupcakes", "chicken", "hot dogs", "pork belly", "lentils", 
-                      "california burrito", "carne asada fries", "candy", "frozen yogurt", "pulled pork", "steak", "pizza", "lasagna", "teriyaki", "pastrami"
+                      "california burrito", "carne asada fries", "candy", "frozen yogurt", "pulled pork", "steak", "pizza", "lasagna", "teriyaki", "pastrami",
                       "kebab", "shawrma", "indian", "moroccan", "greek", "brazilian", "salmon", "crab", "lobster", "oysters", "tortas", "subs", "sandwiches",
                        "cappuccino", "chile", "cheese", "french toast", "naan", "chicken tikka masala", "fried chicken", "jerk chicken", "salad" ];
       var objFoodList = [];
