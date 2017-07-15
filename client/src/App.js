@@ -133,6 +133,8 @@ class App extends Component{
       maxPrice : this.state.maxPrice
     }
 
+
+
     console.log("Updating search", QUERY_BLOCK);
 
     if (timeout) {
